@@ -371,6 +371,37 @@ export default function NazBasket() {
     }
   };
 
+  // Handle HTML File Import
+  const handleHtmlFileImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = event.target?.result as string;
+      if (text) {
+        setFormContent(text);
+        
+        // Auto-fill app name from <title> if it exists
+        try {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, "text/html");
+          const title = doc.querySelector("title")?.textContent;
+          if (title && title.trim()) {
+            setFormName(title.trim());
+          } else {
+            const nameWithoutExt = file.name.replace(/\.html$/i, "");
+            setFormName(nameWithoutExt);
+          }
+        } catch (err) {
+          const nameWithoutExt = file.name.replace(/\.html$/i, "");
+          setFormName(nameWithoutExt);
+        }
+      }
+    };
+    reader.readAsText(file);
+  };
+
   // Handle deleting an app
   const handleDeleteApp = async (appId: string) => {
     if (!db) return;
@@ -402,10 +433,10 @@ export default function NazBasket() {
   if (!initialized) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-100 dark:bg-zinc-950 px-4 py-8 font-sans">
-        <div className="w-full max-w-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl rounded-[24px] overflow-hidden">
+        <div className="w-full max-w-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl rounded-2xl overflow-hidden">
           <div className="p-6 md:p-8">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-blue-500 text-white flex items-center justify-center shadow-md shadow-blue-500/10">
+              <div className="w-10 h-10 rounded-lg bg-blue-500 text-white flex items-center justify-center shadow-md shadow-blue-500/10">
                 <Settings className="w-5 h-5" />
               </div>
               <div>
@@ -414,7 +445,7 @@ export default function NazBasket() {
               </div>
             </div>
 
-            <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 p-4 rounded-xl mb-6">
+            <div className="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 p-4 rounded-lg mb-6">
               <div className="flex gap-3">
                 <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                 <div className="text-sm text-amber-800 dark:text-amber-300">
@@ -438,7 +469,7 @@ export default function NazBasket() {
                   placeholder="e.g. nazbasket"
                   value={wizardProjectId}
                   onChange={(e) => setWizardProjectId(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="w-full px-4 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                 />
               </div>
 
@@ -450,7 +481,7 @@ export default function NazBasket() {
                   placeholder="AIzaSyA..."
                   value={wizardApiKey}
                   onChange={(e) => setWizardApiKey(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="w-full px-4 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                 />
               </div>
 
@@ -462,7 +493,7 @@ export default function NazBasket() {
                     placeholder="nazbasket.firebaseapp.com"
                     value={wizardAuthDomain}
                     onChange={(e) => setWizardAuthDomain(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   />
                 </div>
                 <div>
@@ -472,7 +503,7 @@ export default function NazBasket() {
                     placeholder="nazbasket.firebasestorage.app"
                     value={wizardStorageBucket}
                     onChange={(e) => setWizardStorageBucket(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   />
                 </div>
               </div>
@@ -485,7 +516,7 @@ export default function NazBasket() {
                     placeholder="e.g. 58392058295"
                     value={wizardSenderId}
                     onChange={(e) => setWizardSenderId(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   />
                 </div>
                 <div>
@@ -495,14 +526,14 @@ export default function NazBasket() {
                     placeholder="1:58392058295:web:8a92..."
                     value={wizardAppId}
                     onChange={(e) => setWizardAppId(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full mt-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md shadow-blue-500/10 cursor-pointer text-sm"
+                className="w-full mt-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-md shadow-blue-500/10 cursor-pointer text-sm"
               >
                 Save & Initialize
               </button>
@@ -530,13 +561,13 @@ export default function NazBasket() {
         {/* Elegant top bar */}
         <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shadow font-bold text-lg">🚀</div>
+            <div className="w-8 h-8 rounded-md bg-blue-600 text-white flex items-center justify-center shadow font-bold text-lg">🚀</div>
             <span className="font-bold text-zinc-900 dark:text-white tracking-tight">Naz Basket</span>
           </div>
           {!hasEnvCredentials && (
             <button
               onClick={() => setIsWizardOpen(true)}
-              className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 cursor-pointer"
+              className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-zinc-200 dark:border-zinc-800 cursor-pointer"
             >
               <Settings className="w-3.5 h-3.5" />
               Configure
@@ -562,7 +593,7 @@ export default function NazBasket() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 w-full sm:w-auto">
             <button
               onClick={handleSignIn}
-              className="w-full sm:w-auto flex items-center justify-center gap-3 bg-zinc-950 hover:bg-zinc-800 dark:bg-zinc-50 dark:hover:bg-zinc-200 dark:text-zinc-950 text-white font-bold py-4 px-8 rounded-2xl shadow-lg hover:shadow-xl active:scale-[0.98] transition-all cursor-pointer text-base"
+              className="w-full sm:w-auto flex items-center justify-center gap-3 bg-zinc-950 hover:bg-zinc-800 dark:bg-zinc-50 dark:hover:bg-zinc-200 dark:text-zinc-950 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl active:scale-[0.98] transition-all cursor-pointer text-base"
             >
               {/* Google Flat Icon */}
               <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -589,17 +620,17 @@ export default function NazBasket() {
 
           {/* Feature highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left w-full">
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 p-6 rounded-2xl">
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 p-6 rounded-xl">
               <div className="text-xl mb-2">📦</div>
               <h3 className="font-bold text-zinc-900 dark:text-white mb-1">Instant App Storage</h3>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">Paste raw HTML scripts, CSS, and JS or web links to deploy code directly in the cloud.</p>
             </div>
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 p-6 rounded-2xl">
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 p-6 rounded-xl">
               <div className="text-xl mb-2">▶️</div>
               <h3 className="font-bold text-zinc-900 dark:text-white mb-1">Sandboxed Runner</h3>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">Launch any application in a sandboxed iframe. Secure, isolated, and completely offline-capable.</p>
             </div>
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 p-6 rounded-2xl">
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 p-6 rounded-xl">
               <div className="text-xl mb-2">📱</div>
               <h3 className="font-bold text-zinc-900 dark:text-white mb-1">iOS Home Screen Style</h3>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">A clean, flat layout with wiggle icons, search, quick favorites, and categories.</p>
@@ -615,7 +646,7 @@ export default function NazBasket() {
         {/* Wizard Dialog (if user explicitly chooses manual settings config on login) */}
         {isWizardOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-8">
-            <div className="w-full max-w-md bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl">
+            <div className="w-full max-w-md bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-bold text-zinc-950 dark:text-zinc-50">Firebase Client Setup</h3>
@@ -636,7 +667,7 @@ export default function NazBasket() {
                       placeholder="e.g. nazbasket"
                       value={wizardProjectId}
                       onChange={(e) => setWizardProjectId(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none text-sm"
+                      className="w-full px-3.5 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none text-sm"
                     />
                   </div>
                   <div>
@@ -647,20 +678,20 @@ export default function NazBasket() {
                       placeholder="AIzaSyA..."
                       value={wizardApiKey}
                       onChange={(e) => setWizardApiKey(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none text-sm"
+                      className="w-full px-3.5 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none text-sm"
                     />
                   </div>
                   <div className="flex gap-3 justify-end pt-2">
                     <button
                       type="button"
                       onClick={() => clearFirebaseConfig()}
-                      className="px-4 py-2 text-xs font-semibold text-rose-600 border border-rose-200 rounded-xl hover:bg-rose-50 cursor-pointer"
+                      className="px-4 py-2 text-xs font-semibold text-rose-600 border border-rose-200 rounded-lg hover:bg-rose-50 cursor-pointer"
                     >
                       Clear Saved Config
                     </button>
                     <button
                       type="submit"
-                      className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl cursor-pointer"
+                      className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg cursor-pointer"
                     >
                       Save Settings
                     </button>
@@ -746,7 +777,7 @@ export default function NazBasket() {
               placeholder="Search apps by name..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 text-zinc-900 dark:text-zinc-50 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm text-sm"
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 text-zinc-900 dark:text-zinc-50 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm text-sm"
             />
             {searchTerm && (
               <button
@@ -764,7 +795,7 @@ export default function NazBasket() {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2.5 rounded-2xl text-sm font-semibold whitespace-nowrap transition-all active:scale-95 cursor-pointer border ${
+                className={`px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all active:scale-95 cursor-pointer border ${
                   activeCategory === category
                     ? "bg-blue-600 border-transparent text-white shadow-sm"
                     : "bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-900 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800"
@@ -802,7 +833,7 @@ export default function NazBasket() {
               >
                 {/* Wiggle effects applied in edit mode */}
                 <div
-                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-[20px] ${app.color} shadow-md flex items-center justify-center text-3xl sm:text-4xl transition-all relative ${
+                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-xl ${app.color} shadow-md flex items-center justify-center text-3xl sm:text-4xl transition-all relative ${
                     isEditMode
                       ? index % 2 === 0
                         ? "animate-wiggle"
@@ -865,7 +896,7 @@ export default function NazBasket() {
               onClick={openAddModal}
               className="flex flex-col items-center select-none text-center cursor-pointer group"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-[20px] border-2 border-dashed border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 flex items-center justify-center text-zinc-400 group-hover:text-blue-500 group-hover:border-blue-500 transition-all group-active:scale-95 shadow-sm">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl border-2 border-dashed border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 flex items-center justify-center text-zinc-400 group-hover:text-blue-500 group-hover:border-blue-500 transition-all group-active:scale-95 shadow-sm">
                 <Plus className="w-8 h-8" />
               </div>
               <span className="mt-2 text-xs font-semibold text-zinc-500 group-hover:text-blue-500 transition-colors">
@@ -878,7 +909,7 @@ export default function NazBasket() {
 
         {/* Empty state message when search has zero results */}
         {!appsLoading && filteredApps.length === 0 && (
-          <div className="mt-8 text-center p-8 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 rounded-[24px] shadow-sm max-w-md mx-auto">
+          <div className="mt-8 text-center p-8 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 rounded-2xl shadow-sm max-w-md mx-auto">
             <AlertCircle className="w-8 h-8 text-zinc-400 mx-auto mb-2" />
             <p className="font-semibold text-zinc-800 dark:text-zinc-200">No apps found</p>
             <p className="text-xs text-zinc-400 mt-1">
@@ -962,7 +993,7 @@ export default function NazBasket() {
               {/* Close/Exit Screen */}
               <button
                 onClick={() => setActiveRunningApp(null)}
-                className="flex items-center gap-1.5 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-xs font-bold rounded-xl transition-all cursor-pointer"
+                className="flex items-center gap-1.5 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 active:scale-95 text-xs font-bold rounded-lg transition-all cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Exit Home</span>
@@ -975,7 +1006,7 @@ export default function NazBasket() {
       {/* 5. Add / Edit App Drawer Modal */}
       {isAddEditModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-8 overflow-y-auto">
-          <div className="w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl flex flex-col my-auto max-h-[90vh]">
+          <div className="w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl flex flex-col my-auto max-h-[90vh]">
             
             {/* Header */}
             <div className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 shrink-0">
@@ -999,11 +1030,11 @@ export default function NazBasket() {
               {/* App Type Switch Tabs */}
               <div>
                 <label className="block text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-2">App Type</label>
-                <div className="grid grid-cols-2 p-1 bg-zinc-100 dark:bg-zinc-950 rounded-xl">
+                <div className="grid grid-cols-2 p-1 bg-zinc-100 dark:bg-zinc-950 rounded-lg">
                   <button
                     type="button"
                     onClick={() => setFormType("html")}
-                    className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                    className={`py-2 rounded-md text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                       formType === "html"
                         ? "bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-50 shadow-sm"
                         : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
@@ -1015,7 +1046,7 @@ export default function NazBasket() {
                   <button
                     type="button"
                     onClick={() => setFormType("url")}
-                    className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                    className={`py-2 rounded-md text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                       formType === "url"
                         ? "bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-50 shadow-sm"
                         : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
@@ -1037,7 +1068,7 @@ export default function NazBasket() {
                     placeholder="e.g. My Workout Tracker"
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   />
                 </div>
 
@@ -1046,7 +1077,7 @@ export default function NazBasket() {
                   <select
                     value={formCategory}
                     onChange={(e) => setFormCategory(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   >
                     {CATEGORIES.slice(1).map((cat) => (
                       <option key={cat} value={cat}>
@@ -1060,13 +1091,13 @@ export default function NazBasket() {
               {/* Icon selector & custom input */}
               <div className="space-y-3">
                 <label className="block text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-0.5">Icon (Emoji) *</label>
-                <div className="flex gap-2 flex-wrap max-h-24 overflow-y-auto p-2 bg-zinc-50 dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-900">
+                <div className="flex gap-2 flex-wrap max-h-24 overflow-y-auto p-2 bg-zinc-50 dark:bg-zinc-950 rounded-lg border border-zinc-100 dark:border-zinc-900">
                   {PRESET_EMOJIS.map((emoji) => (
                     <button
                       key={emoji}
                       type="button"
                       onClick={() => setFormIcon(emoji)}
-                      className={`w-9 h-9 rounded-lg flex items-center justify-center text-xl transition-all hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer ${
+                      className={`w-9 h-9 rounded-md flex items-center justify-center text-xl transition-all hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer ${
                         formIcon === emoji ? "bg-zinc-300 dark:bg-zinc-800 ring-2 ring-blue-500" : ""
                       }`}
                     >
@@ -1081,7 +1112,7 @@ export default function NazBasket() {
                     maxLength={2}
                     value={formIcon}
                     onChange={(e) => setFormIcon(e.target.value)}
-                    className="w-12 text-center py-1 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-sm font-bold"
+                    className="w-12 text-center py-1 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-sm font-bold"
                   />
                 </div>
               </div>
@@ -1111,15 +1142,27 @@ export default function NazBasket() {
               {/* Content Code Textarea or URL Target */}
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">
-                    {formType === "html" ? "HTML Code Content *" : "Web URL Link *"}
-                  </label>
-                  {formType === "url" && (
-                    <span className="text-[10px] text-amber-500 font-semibold flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3" />
-                      Some external URLs may require opening in new tab.
-                    </span>
-                  )}
+                  <div className="flex items-center justify-between w-full">
+                    <label className="block text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">
+                      {formType === "html" ? "HTML Code Content *" : "Web URL Link *"}
+                    </label>
+                    {formType === "html" ? (
+                      <label className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer flex items-center gap-1">
+                        <span>Import HTML File</span>
+                        <input
+                          type="file"
+                          accept=".html"
+                          onChange={handleHtmlFileImport}
+                          className="hidden"
+                         />
+                      </label>
+                    ) : (
+                      <span className="text-[10px] text-amber-500 font-semibold flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        Some external URLs may require opening in new tab.
+                      </span>
+                    )}
+                  </div>
                 </div>
                 
                 {formType === "html" ? (
@@ -1129,7 +1172,7 @@ export default function NazBasket() {
                     placeholder="<!DOCTYPE html>..."
                     value={formContent}
                     onChange={(e) => setFormContent(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-zinc-900"
+                    className="w-full px-4 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-zinc-900"
                   />
                 ) : (
                   <input
@@ -1138,7 +1181,7 @@ export default function NazBasket() {
                     placeholder="https://example.com"
                     value={formContent}
                     onChange={(e) => setFormContent(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full px-4 py-2.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   />
                 )}
               </div>
@@ -1160,7 +1203,7 @@ export default function NazBasket() {
 
               {/* Form Error Display */}
               {formError && (
-                <div className="p-3.5 bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 text-xs font-semibold rounded-xl flex items-center gap-2">
+                <div className="p-3.5 bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 text-xs font-semibold rounded-lg flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{formError}</span>
                 </div>
@@ -1171,14 +1214,14 @@ export default function NazBasket() {
                 <button
                   type="button"
                   onClick={() => setIsAddEditModalOpen(false)}
-                  className="px-5 py-2.5 rounded-xl text-sm font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
+                  className="px-5 py-2.5 rounded-lg text-sm font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSavingApp}
-                  className="px-6 py-2.5 rounded-xl text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white disabled:bg-blue-400 flex items-center gap-2 transition-colors cursor-pointer"
+                  className="px-6 py-2.5 rounded-lg text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white disabled:bg-blue-400 flex items-center gap-2 transition-colors cursor-pointer"
                 >
                   {isSavingApp && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>}
                   <span>Save App</span>
