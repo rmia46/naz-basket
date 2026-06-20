@@ -42,7 +42,8 @@ import {
   BookOpen,
   HelpCircle,
   Archive,
-  LayoutGrid
+  LayoutGrid,
+  Sparkles
 } from "lucide-react";
 import {
   auth,
@@ -160,6 +161,9 @@ export default function NazBasket() {
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [selectedAppForEdit, setSelectedAppForEdit] = useState<CustomApp | null>(null);
 
+  // Gemini Sidebar State
+  const [isGeminiOpen, setIsGeminiOpen] = useState(false);
+
   // Wizard Configuration State
   const [wizardApiKey, setWizardApiKey] = useState("");
   const [wizardAuthDomain, setWizardAuthDomain] = useState("");
@@ -182,11 +186,10 @@ export default function NazBasket() {
   // Current Date display for iOS dashboard style
   const [currentDateString, setCurrentDateString] = useState("");
 
-  // Initialize Auth and check config
+  // Format current date in a clean dashboard style (e.g. "SATURDAY, JUNE 20")
   useEffect(() => {
     setInitialized(isFirebaseInitialized());
 
-    // Format current date in a clean iOS style (e.g. "SATURDAY, JUNE 20")
     const options: Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric' };
     setCurrentDateString(new Date().toLocaleDateString('en-US', options).toUpperCase());
 
@@ -200,6 +203,8 @@ export default function NazBasket() {
       setAuthLoading(false);
     }
   }, []);
+
+
 
   // Fetch custom apps from Firestore when signed in
   useEffect(() => {
@@ -477,6 +482,8 @@ export default function NazBasket() {
     setIframeKey((prev) => prev + 1);
   };
 
+
+
   if (authLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-100 dark:bg-zinc-950 font-sans">
@@ -618,8 +625,10 @@ export default function NazBasket() {
         {/* Elegant top bar */}
         <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900">
           <div className="flex items-center gap-2">
-            <img src="/logo.jpg" alt="Naz Basket Logo" className="w-8 h-8 rounded-md shadow-sm object-cover shrink-0" />
-            <span className="font-bold text-zinc-900 dark:text-white tracking-tight">Naz Basket</span>
+            <img src="/logo.jpg" alt="Naz Basket Logo" className="w-8 h-8 rounded-full shadow-sm object-cover shrink-0" />
+            <span className="font-black text-xl tracking-tight text-zinc-900 dark:text-white select-none">
+              Naz<span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-bold">Basket</span>
+            </span>
           </div>
           {!hasEnvCredentials && (
             <button
@@ -633,14 +642,27 @@ export default function NazBasket() {
         </header>
 
         {/* Hero Section */}
-        <main className="flex-1 flex flex-col items-center justify-center px-4 max-w-5xl mx-auto w-full text-center">
+        <main className="flex-1 flex flex-col items-center justify-center px-4 max-w-5xl mx-auto w-full text-center py-8">
           
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white max-w-3xl leading-[1.1] mb-6">
-            Your personal cloud-synced home screen for <span className="text-blue-600">custom HTML apps</span>
+          {/* Stunning Brand Hero Header */}
+          <div className="mb-6 flex flex-col items-center gap-2">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 p-0.5 shadow-xl transition-transform hover:scale-105 duration-300">
+              <div className="w-full h-full bg-white dark:bg-zinc-950 rounded-full flex items-center justify-center overflow-hidden">
+                <img src="/logo.jpg" alt="Naz Basket Logo" className="w-[85%] h-[85%] object-cover rounded-full" />
+              </div>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-semibold mt-2">
+              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
+              <span>Personal HTML App Hub</span>
+            </div>
+          </div>
+          
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight text-zinc-900 dark:text-white max-w-3xl leading-[1.15] mb-6">
+            Welcome to <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent font-black">Naz Basket</span>
           </h1>
           
           <p className="text-base md:text-lg text-zinc-500 dark:text-zinc-400 max-w-xl mb-10 leading-relaxed">
-            Create, store, and run all your custom mini HTML widgets, websites, and single-file tools in one place. Synced automatically.
+            Your personal cloud-synced home screen to host, run, and sync custom HTML snippets, web links, and widgets in one gorgeous iOS-style dashboard.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 w-full sm:w-auto">
@@ -768,8 +790,10 @@ export default function NazBasket() {
           <div>
             <span className="text-xs font-bold text-zinc-400 dark:text-zinc-500 tracking-widest">{currentDateString}</span>
             <div className="flex items-center gap-2.5 mt-0.5">
-              <img src="/logo.jpg" alt="Naz Basket Logo" className="w-9 h-9 rounded-md shadow-sm object-cover shrink-0" />
-              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Naz Basket</h1>
+              <img src="/logo.jpg" alt="Naz Basket Logo" className="w-9 h-9 rounded-full shadow-sm object-cover shrink-0" />
+              <h1 className="text-3xl md:text-4xl font-black tracking-tight">
+                Naz<span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Basket</span>
+              </h1>
               {isEditMode && (
                 <span className="text-xs bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-400 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
                   Edit Mode
@@ -792,6 +816,19 @@ export default function NazBasket() {
                 {user.displayName || "User"}
               </span>
             </div>
+
+            {/* Gemini Toggle */}
+            <button
+              onClick={() => setIsGeminiOpen(!isGeminiOpen)}
+              className={`p-2.5 rounded-full transition-all active:scale-95 shadow-sm border border-zinc-200 dark:border-zinc-900 cursor-pointer ${
+                isGeminiOpen
+                  ? "bg-blue-600 text-white border-transparent"
+                  : "bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+              }`}
+              title="Gemini AI Chat"
+            >
+              <Sparkles className="w-5 h-5" />
+            </button>
 
             {/* Edit Mode Button */}
             <button
@@ -1326,6 +1363,66 @@ export default function NazBasket() {
           </div>
         </div>
       )}
+
+      {/* 7. Collapsible Gemini Sidebar */}
+      <div
+        className={`fixed top-0 right-0 h-full w-80 sm:w-[480px] bg-white dark:bg-zinc-900 border-l border-zinc-200 dark:border-zinc-800 shadow-2xl transition-transform duration-300 ease-in-out z-40 flex flex-col ${
+          isGeminiOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {/* Sidebar Header */}
+        <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 shrink-0">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-blue-600 animate-pulse" />
+            <span className="font-extrabold text-sm text-zinc-900 dark:text-white">Gemini Web App</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://gemini.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-full text-zinc-400 hover:text-blue-600 hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer transition-colors"
+              title="Open Gemini in New Tab"
+            >
+              <ExternalLink className="w-4 h-4" />
+            </a>
+            <button
+              onClick={() => setIsGeminiOpen(false)}
+              className="p-1.5 rounded-full text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer"
+              title="Close Panel"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Info Box */}
+        <div className="p-4 bg-amber-50 dark:bg-amber-950/20 border-b border-amber-200/50 dark:border-amber-900/30 text-xs text-amber-800 dark:text-amber-300 shrink-0">
+          <p className="font-bold mb-1">💡 Sandbox Embed Notice</p>
+          <p className="mb-2">
+            Google restricts embedding the Gemini web app in third-party frames due to security constraints. If the screen below remains blank or shows a refusal error, launch it directly using the button below.
+          </p>
+          <a
+            href="https://gemini.google.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded font-bold transition-all text-[11px] shadow-sm cursor-pointer"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            Open Gemini in New Tab
+          </a>
+        </div>
+
+        {/* Embedded Iframe */}
+        <div className="flex-1 bg-zinc-100 dark:bg-zinc-950 relative">
+          <iframe
+            src="https://gemini.google.com"
+            className="w-full h-full border-none"
+            title="Google Gemini"
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
+          />
+        </div>
+      </div>
 
     </div>
   );
