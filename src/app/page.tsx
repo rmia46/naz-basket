@@ -17,7 +17,29 @@ import {
   Check,
   Lock,
   Globe,
-  Code
+  Code,
+  Dumbbell,
+  FileText,
+  Gamepad2,
+  Clock,
+  Palette,
+  Music,
+  Utensils,
+  Calendar as CalendarIcon,
+  MessageSquare,
+  TrendingUp,
+  CloudLightning,
+  Lightbulb,
+  DollarSign,
+  Map,
+  Film,
+  Target,
+  Calculator,
+  Terminal,
+  Link as LinkIcon,
+  CheckSquare,
+  BookOpen,
+  HelpCircle
 } from "lucide-react";
 import {
   auth,
@@ -68,9 +90,40 @@ const ICON_COLORS = [
   { name: "Slate", bgClass: "bg-zinc-600 text-white" },
 ];
 
-const PRESET_EMOJIS = [
-  "🚀", "🏋️", "📝", "🎮", "⏱️", "🎨", "🎵", "🍔", "📅", "💬",
-  "⚙️", "📈", "🌦️", "🔋", "💡", "💰", "🗺️", "🍿", "📚", "🎯"
+// Map of available Lucide icons for app grids
+export const ICON_COMPONENTS: Record<string, React.ComponentType<any>> = {
+  Terminal,
+  CheckSquare,
+  Dumbbell,
+  FileText,
+  Gamepad2,
+  Clock,
+  Palette,
+  Music,
+  Utensils,
+  Calendar: CalendarIcon,
+  MessageSquare,
+  Settings,
+  TrendingUp,
+  CloudLightning,
+  Lightbulb,
+  DollarSign,
+  Map,
+  Film,
+  Target,
+  Calculator,
+  Link: LinkIcon,
+  Globe,
+  BookOpen,
+  Search
+};
+
+const PRESET_ICONS = [
+  "Terminal", "CheckSquare", "Dumbbell", "FileText", "Gamepad2",
+  "Clock", "Palette", "Music", "Utensils", "Calendar",
+  "MessageSquare", "Settings", "TrendingUp", "CloudLightning",
+  "Lightbulb", "DollarSign", "Map", "Film", "Target", "Calculator",
+  "Link", "Globe", "BookOpen", "Search"
 ];
 
 const CATEGORIES = ["All", "Utilities", "Productivity", "Games", "Fitness", "Entertainment", "Other"];
@@ -291,7 +344,7 @@ export default function NazBasket() {
   <button onclick="alert('Hello from Naz Basket!')">Click Me</button>
 </body>
 </html>`);
-    setFormIcon("🚀");
+    setFormIcon("Terminal");
     setFormColor("bg-blue-500 text-white");
     setFormCategory("Utilities");
     setFormFavorite(false);
@@ -842,7 +895,10 @@ export default function NazBasket() {
                       : "hover:scale-[1.03] active:scale-95"
                   }`}
                 >
-                  <span>{app.icon}</span>
+                  {(() => {
+                    const IconComponent = ICON_COMPONENTS[app.icon] || HelpCircle;
+                    return <IconComponent className="w-7 h-7 sm:w-8 sm:h-8" strokeWidth={2} />;
+                  })()}
 
                   {/* Favorite Badge (Star icon) */}
                   {app.favorite && (
@@ -962,8 +1018,11 @@ export default function NazBasket() {
           {/* Flat Bottom Toolbar Menu */}
           <div className="h-16 bg-zinc-950 text-white flex items-center justify-between px-6 border-t border-zinc-900 shrink-0">
             {/* Title & Type */}
-            <div className="flex items-center gap-2 max-w-[50%]">
-              <span className="text-xl shrink-0">{activeRunningApp.icon}</span>
+            <div className="flex items-center gap-2.5 max-w-[50%]">
+              {(() => {
+                const IconComponent = ICON_COMPONENTS[activeRunningApp.icon] || HelpCircle;
+                return <IconComponent className="w-5 h-5 shrink-0 text-white" strokeWidth={2.2} />;
+              })()}
               <span className="font-bold text-sm truncate">{activeRunningApp.name}</span>
             </div>
 
@@ -1012,7 +1071,10 @@ export default function NazBasket() {
             {/* Header */}
             <div className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 shrink-0">
               <div className="flex items-center gap-2">
-                <span className="text-xl">{formIcon}</span>
+                {(() => {
+                  const IconComponent = ICON_COMPONENTS[formIcon] || HelpCircle;
+                  return <IconComponent className="w-5 h-5 text-zinc-700 dark:text-zinc-300" strokeWidth={2.2} />;
+                })()}
                 <h3 className="font-extrabold text-lg text-zinc-900 dark:text-white">
                   {modalMode === "add" ? "Create New App" : `Edit App: ${formName}`}
                 </h3>
@@ -1091,29 +1153,33 @@ export default function NazBasket() {
 
               {/* Icon selector & custom input */}
               <div className="space-y-3">
-                <label className="block text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-0.5">Icon (Emoji) *</label>
+                <label className="block text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-0.5">Icon *</label>
                 <div className="flex gap-2 flex-wrap max-h-24 overflow-y-auto p-2 bg-zinc-50 dark:bg-zinc-950 rounded-lg border border-zinc-100 dark:border-zinc-900">
-                  {PRESET_EMOJIS.map((emoji) => (
-                    <button
-                      key={emoji}
-                      type="button"
-                      onClick={() => setFormIcon(emoji)}
-                      className={`w-9 h-9 rounded-md flex items-center justify-center text-xl transition-all hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer ${
-                        formIcon === emoji ? "bg-zinc-300 dark:bg-zinc-800 ring-2 ring-blue-500" : ""
-                      }`}
-                    >
-                      {emoji}
-                    </button>
-                  ))}
+                  {PRESET_ICONS.map((iconName) => {
+                    const IconComponent = ICON_COMPONENTS[iconName] || HelpCircle;
+                    return (
+                      <button
+                        key={iconName}
+                        type="button"
+                        onClick={() => setFormIcon(iconName)}
+                        className={`w-9 h-9 rounded-md flex items-center justify-center transition-all hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer ${
+                          formIcon === iconName ? "bg-zinc-300 dark:bg-zinc-800 ring-2 ring-blue-500 text-blue-600" : "text-zinc-600 dark:text-zinc-400"
+                        }`}
+                        title={iconName}
+                      >
+                        <IconComponent className="w-5 h-5" strokeWidth={2} />
+                      </button>
+                    );
+                  })}
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold text-zinc-400">Custom emoji input:</span>
+                  <span className="text-xs font-semibold text-zinc-400">Custom Lucide icon name:</span>
                   <input
                     type="text"
-                    maxLength={2}
                     value={formIcon}
                     onChange={(e) => setFormIcon(e.target.value)}
-                    className="w-12 text-center py-1 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-sm font-bold"
+                    className="px-3 py-1 rounded-md border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-sm font-semibold w-36 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="e.g. Heart, Play, Star"
                   />
                 </div>
               </div>
