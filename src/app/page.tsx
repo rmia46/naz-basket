@@ -46,6 +46,7 @@ import AppCard from "@/components/AppCard";
 import DashboardHeader from "@/components/DashboardHeader";
 import CategoryPicker from "@/components/CategoryPicker";
 import AddEditAppModal from "@/components/AddEditAppModal";
+import BottomNav from "@/components/BottomNav";
 
 export default function NazBasket() {
   // Authentication State
@@ -410,14 +411,14 @@ export default function NazBasket() {
       />
 
       {/* Main Apps Grid Display */}
-      <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-6">
+      <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-6 pb-20 md:pb-6">
         {appsLoading ? (
           <div className="h-48 flex items-center justify-center">
             <div className={`w-8 h-8 border-3 border-zinc-200 ${theme.accentText} border-t-transparent rounded-full animate-spin`}></div>
             <span className={`ml-3 ${theme.textSecondary} font-medium`}>Syncing database...</span>
           </div>
         ) : (
-          <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-6">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-2.5 gap-y-5 sm:gap-x-4 sm:gap-y-6">
             
             {/* Apps list */}
             {filteredApps.map((app, index) => (
@@ -501,6 +502,7 @@ export default function NazBasket() {
       <AboutModal
         isOpen={isAboutOpen}
         onClose={() => setIsAboutOpen(false)}
+        onLogoutConfirm={() => setIsLogoutConfirmOpen(true)}
       />
 
       {/* Help Guide Modal Popup overlay */}
@@ -520,6 +522,18 @@ export default function NazBasket() {
       <AiCompanionHub
         isOpen={isGeminiOpen}
         onClose={() => setIsGeminiOpen(false)}
+      />
+
+      {/* Mobile Bottom Navigation Bar */}
+      <BottomNav
+        isGeminiOpen={isGeminiOpen}
+        setIsGeminiOpen={setIsGeminiOpen}
+        isEditMode={isEditMode}
+        setIsEditMode={setIsEditMode}
+        setIsAboutOpen={setIsAboutOpen}
+        setIsHelpOpen={setIsHelpOpen}
+        activeRunningApp={activeRunningApp}
+        setActiveRunningApp={setActiveRunningApp}
       />
 
     </div>

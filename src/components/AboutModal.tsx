@@ -7,9 +7,10 @@ import { theme } from "@/lib/theme";
 interface AboutModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onLogoutConfirm?: () => void;
 }
 
-export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
+export default function AboutModal({ isOpen, onClose, onLogoutConfirm }: AboutModalProps) {
   if (!isOpen) return null;
 
   return (
@@ -109,7 +110,20 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
         </div>
 
         {/* Footer */}
-        <div className={`px-6 py-4 border-t ${theme.inputBorder} ${theme.modalFooterBg} flex justify-end`}>
+        <div className={`px-6 py-4 border-t ${theme.inputBorder} ${theme.modalFooterBg} flex justify-between items-center`}>
+          {onLogoutConfirm ? (
+            <button
+              onClick={() => {
+                onClose();
+                onLogoutConfirm();
+              }}
+              className={`px-4 py-2 ${theme.radiusSmall} text-xs font-bold ${theme.btnDanger} cursor-pointer`}
+            >
+              Sign Out
+            </button>
+          ) : (
+            <div />
+          )}
           <button
             onClick={onClose}
             className={`px-4 py-2 ${theme.radiusSmall} text-xs font-bold ${theme.btnPrimary} cursor-pointer`}
