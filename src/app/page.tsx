@@ -625,7 +625,7 @@ export default function NazBasket() {
         {/* Elegant top bar */}
         <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900">
           <div className="flex items-center gap-2">
-            <img src="/logo.jpg" alt="Naz Basket Logo" className="w-8 h-8 rounded-full shadow-sm object-cover shrink-0" />
+            <img src="/logo.jpg" alt="Naz Basket Logo" className="w-8 h-8 rounded-md shadow-sm object-cover shrink-0" />
             <span className="font-black text-xl tracking-tight text-zinc-900 dark:text-white select-none">
               Naz<span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-bold">Basket</span>
             </span>
@@ -646,9 +646,9 @@ export default function NazBasket() {
           
           {/* Stunning Brand Hero Header */}
           <div className="mb-6 flex flex-col items-center gap-2">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 p-0.5 shadow-xl transition-transform hover:scale-105 duration-300">
-              <div className="w-full h-full bg-white dark:bg-zinc-950 rounded-full flex items-center justify-center overflow-hidden">
-                <img src="/logo.jpg" alt="Naz Basket Logo" className="w-[85%] h-[85%] object-cover rounded-full" />
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-600 p-0.5 shadow-xl transition-transform hover:scale-105 duration-300">
+              <div className="w-full h-full bg-white dark:bg-zinc-950 rounded-2xl flex items-center justify-center overflow-hidden">
+                <img src="/logo.jpg" alt="Naz Basket Logo" className="w-[85%] h-[85%] object-cover rounded-xl" />
               </div>
             </div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-semibold mt-2">
@@ -790,7 +790,7 @@ export default function NazBasket() {
           <div>
             <span className="text-xs font-bold text-zinc-400 dark:text-zinc-500 tracking-widest">{currentDateString}</span>
             <div className="flex items-center gap-2.5 mt-0.5">
-              <img src="/logo.jpg" alt="Naz Basket Logo" className="w-9 h-9 rounded-full shadow-sm object-cover shrink-0" />
+              <img src="/logo.jpg" alt="Naz Basket Logo" className="w-9 h-9 rounded-md shadow-sm object-cover shrink-0" />
               <h1 className="text-3xl md:text-4xl font-black tracking-tight">
                 Naz<span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Basket</span>
               </h1>
