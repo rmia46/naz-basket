@@ -67,6 +67,16 @@ export default function AboutModal({ isOpen, onClose, onLogoutConfirm }: AboutMo
             </p>
           </div>
 
+          {/* Privacy & Security */}
+          <div className="space-y-2">
+            <h4 className={`font-extrabold text-sm ${theme.textPrimary} border-b ${theme.inputBorder} pb-1.5`}>
+              Privacy & Security
+            </h4>
+            <p className={`text-xs md:text-sm ${theme.textSecondary} leading-relaxed`}>
+              We value your privacy. <strong>No personal data is collected or tracked</strong> by this application. Log in with Google is used strictly for authentication purposes and to protect the application from unauthorized access or misuse.
+            </p>
+          </div>
+
           {/* Grid: Author & Repo */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Author Card */}
