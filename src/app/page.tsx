@@ -630,8 +630,9 @@ export default function NazBasket() {
         <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900">
           <div className="flex items-center gap-2">
             <img src="/logo.jpg" alt="Naz Basket Logo" className="w-8 h-8 rounded-md shadow-sm object-cover shrink-0" />
-            <span className="font-black text-xl tracking-tight text-zinc-900 dark:text-white select-none">
-              Naz<span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-bold">Basket</span>
+            <span className="select-none flex items-baseline gap-1">
+              <span className="font-display font-normal text-zinc-950 dark:text-zinc-50 text-2xl">Naz</span>
+              <span className="font-sans font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent text-lg">Basket</span>
             </span>
           </div>
           {!hasEnvCredentials && (
@@ -661,8 +662,10 @@ export default function NazBasket() {
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight text-zinc-900 dark:text-white max-w-3xl leading-[1.15] mb-6">
-            Welcome to <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent font-black">Naz Basket</span>
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight text-zinc-900 dark:text-white max-w-3xl leading-[1.2] mb-6 flex flex-wrap justify-center items-baseline gap-x-2">
+            <span>Welcome to</span>
+            <span className="font-display font-normal text-zinc-950 dark:text-zinc-50 text-5xl md:text-7xl pt-1">Naz</span>
+            <span className="font-sans font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Basket</span>
           </h1>
           
           <p className="text-base md:text-lg text-zinc-500 dark:text-zinc-400 max-w-xl mb-10 leading-relaxed">
@@ -801,8 +804,9 @@ export default function NazBasket() {
             <span className="text-xs font-bold text-zinc-400 dark:text-zinc-500 tracking-widest">{currentDateString}</span>
             <div className="flex items-center gap-2.5 mt-0.5">
               <img src="/logo.jpg" alt="Naz Basket Logo" className="w-9 h-9 rounded-md shadow-sm object-cover shrink-0" />
-              <h1 className="text-3xl md:text-4xl font-black tracking-tight">
-                Naz<span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Basket</span>
+              <h1 className="tracking-tight flex items-baseline gap-1.5">
+                <span className="font-display font-normal text-zinc-950 dark:text-zinc-50 text-4xl pt-1">Naz</span>
+                <span className="font-sans font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent text-3xl md:text-4xl">Basket</span>
               </h1>
               {isEditMode && (
                 <span className="text-xs bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-400 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
@@ -1363,8 +1367,9 @@ export default function NazBasket() {
             <div className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 shrink-0">
               <div className="flex items-center gap-2">
                 <img src="/logo.jpg" alt="Naz Basket Logo" className="w-7 h-7 rounded-md shadow-sm object-cover" />
-                <span className="font-black text-lg tracking-tight select-none">
-                  Naz<span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-bold">Basket</span>
+                <span className="select-none flex items-baseline gap-1">
+                  <span className="font-display font-normal text-zinc-950 dark:text-zinc-50 text-xl">Naz</span>
+                  <span className="font-sans font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent text-base">Basket</span>
                 </span>
               </div>
               <button
@@ -1387,8 +1392,10 @@ export default function NazBasket() {
                   </div>
                 </div>
                 <div className="space-y-0.5">
-                  <h3 className="text-2xl font-black tracking-tight text-zinc-900 dark:text-white">
-                    About <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Naz Basket</span>
+                  <h3 className="text-2xl font-black tracking-tight text-zinc-900 dark:text-white flex justify-center items-baseline gap-1.5">
+                    <span>About</span>
+                    <span className="font-display font-normal text-zinc-950 dark:text-zinc-50 text-3xl pt-1">Naz</span>
+                    <span className="font-sans font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Basket</span>
                   </h3>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
                     Personal Single-File HTML Application Hub & Runner

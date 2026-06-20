@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-mono), monospace;
+  --font-display: var(--font-display), cursive;
 }
 
 @media (prefers-color-scheme: dark) {

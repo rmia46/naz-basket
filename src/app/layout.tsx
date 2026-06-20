@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, JetBrains_Mono, Satisfy } from "next/font/google";
 import "./globals.css";
 
 const sansFont = Plus_Jakarta_Sans({
@@ -9,6 +9,12 @@ const sansFont = Plus_Jakarta_Sans({
 
 const monoFont = JetBrains_Mono({
   variable: "--font-mono",
+  subsets: ["latin"],
+});
+
+const displayFont = Satisfy({
+  variable: "--font-display",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -25,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sansFont.variable} ${monoFont.variable} h-full antialiased`}
+      className={`${sansFont.variable} ${monoFont.variable} ${displayFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
