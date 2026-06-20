@@ -139,15 +139,29 @@ function checkUnclosedTags(html: string, warnings: HtmlValidationIssue[]) {
 }
 
 function checkMalformedAttributes(html: string, warnings: HtmlValidationIssue[]) {
-  const malformedRegex = /=\s*([^'"\s>][^>\s]*)(?:\s|>)/g;
+  // This regex looks for an attribute name, an equals sign, 
+  // and catches it if it doesn't start with a single or double quote.
+  const malformedRegex = /\b[a-zA-Z\-]+=\s*([^'"\s>][^>\s]*)/g;
+  
   let match;
   while ((match = malformedRegex.exec(html)) !== null) {
-    if (match[1] && !match[1].startsWith('"') && !match[1].startsWith("'")) {
-      warnings.push({
-        type: "warning",
-        message: `Attribute value without quotes: ${match[1]}`,
-        detail: "Consider wrapping attribute values in quotes for HTML validity."
-      });
+    const fullMatch = match[0];
+    const valuePart = match[1];
+
+    // Ensure we aren't accidentally matching something inside a valid style or content string
+    // by checking if the value contains internal assignments without outer quotes
+    if (valuePart && !valuePart.startsWith('"') && !valuePart.startsWith("'")) {
+        
+        // IGNORE: Common multi-property internal assignments like width=device-width inside quotes
+        if (fullMatch.includes('content=') || fullMatch.includes('style=')) {
+            continue; 
+        }
+
+        warnings.push({
+            type: "warning",
+            message: `Attribute value without quotes: ${valuePart}`,
+            detail: "Consider wrapping attribute values in quotes for HTML validity."
+        });
     }
   }
 }
