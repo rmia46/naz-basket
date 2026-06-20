@@ -18,6 +18,7 @@ import {
   Lock,
   Globe,
   Code,
+  Play,
   Dumbbell,
   FileText,
   Gamepad2,
@@ -39,7 +40,9 @@ import {
   Link as LinkIcon,
   CheckSquare,
   BookOpen,
-  HelpCircle
+  HelpCircle,
+  Archive,
+  LayoutGrid
 } from "lucide-react";
 import {
   auth,
@@ -153,6 +156,7 @@ export default function NazBasket() {
   // Modals & Wizard State
   const [isWizardOpen, setIsWizardOpen] = useState(false);
   const [isAddEditModalOpen, setIsAddEditModalOpen] = useState(false);
+  const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [selectedAppForEdit, setSelectedAppForEdit] = useState<CustomApp | null>(null);
 
@@ -630,10 +634,6 @@ export default function NazBasket() {
 
         {/* Hero Section */}
         <main className="flex-1 flex flex-col items-center justify-center px-4 max-w-5xl mx-auto w-full text-center">
-          <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/50 px-3.5 py-1.5 rounded-full mb-6">
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-            <span className="text-xs font-semibold text-blue-800 dark:text-blue-300 uppercase tracking-wider">Now Available</span>
-          </div>
           
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white max-w-3xl leading-[1.1] mb-6">
             Your personal cloud-synced home screen for <span className="text-blue-600">custom HTML apps</span>
@@ -674,18 +674,18 @@ export default function NazBasket() {
           {/* Feature highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left w-full">
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 p-6 rounded-xl">
-              <div className="text-xl mb-2">📦</div>
+              <Archive className="w-6 h-6 text-zinc-700 dark:text-zinc-300 mb-3" />
               <h3 className="font-bold text-zinc-900 dark:text-white mb-1">Instant App Storage</h3>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">Paste raw HTML scripts, CSS, and JS or web links to deploy code directly in the cloud.</p>
             </div>
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 p-6 rounded-xl">
-              <div className="text-xl mb-2">▶️</div>
+              <Play className="w-6 h-6 text-zinc-700 dark:text-zinc-300 mb-3" />
               <h3 className="font-bold text-zinc-900 dark:text-white mb-1">Sandboxed Runner</h3>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">Launch any application in a sandboxed iframe. Secure, isolated, and completely offline-capable.</p>
             </div>
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-900 p-6 rounded-xl">
-              <div className="text-xl mb-2">📱</div>
-              <h3 className="font-bold text-zinc-900 dark:text-white mb-1">iOS Home Screen Style</h3>
+              <LayoutGrid className="w-6 h-6 text-zinc-700 dark:text-zinc-300 mb-3" />
+              <h3 className="font-bold text-zinc-900 dark:text-white mb-1">Clean Dashboard Layout</h3>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">A clean, flat layout with wiggle icons, search, quick favorites, and categories.</p>
             </div>
           </div>
@@ -808,7 +808,7 @@ export default function NazBasket() {
 
             {/* Logout */}
             <button
-              onClick={handleSignOut}
+              onClick={() => setIsLogoutConfirmOpen(true)}
               className="p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-900 rounded-full transition-all active:scale-95 shadow-sm cursor-pointer"
               title="Sign Out"
             >
@@ -1295,6 +1295,34 @@ export default function NazBasket() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {/* 6. Logout Confirmation Modal */}
+      {isLogoutConfirmOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-8">
+          <div className="w-full max-w-sm bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl p-6">
+            <h3 className="font-extrabold text-lg text-zinc-900 dark:text-white mb-2">Sign Out</h3>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
+              Are you sure you want to sign out of Naz Basket?
+            </p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setIsLogoutConfirmOpen(false)}
+                className="px-4 py-2 rounded-lg text-sm font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  setIsLogoutConfirmOpen(false);
+                  handleSignOut();
+                }}
+                className="px-4 py-2 rounded-lg text-sm font-bold bg-rose-600 hover:bg-rose-700 text-white cursor-pointer"
+              >
+                Sign Out
+              </button>
+            </div>
           </div>
         </div>
       )}
