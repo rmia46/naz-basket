@@ -15,7 +15,7 @@ export default function AboutModal({ isOpen, onClose, onLogoutConfirm }: AboutMo
 
   return (
     <div className={`fixed inset-0 z-50 flex items-center justify-center ${theme.modalOverlayBg} px-4 py-8 animate-fade-in`}>
-      <div className={`w-full max-w-lg ${theme.modalBg} ${theme.radiusLarge} overflow-hidden ${theme.modalBorder} shadow-2xl flex flex-col`}>
+      <div className={`w-full max-w-lg ${theme.modalBg} ${theme.radiusLarge} overflow-hidden ${theme.modalBorder} shadow-2xl flex flex-col max-h-[85vh] my-auto`}>
         
         {/* Header */}
         <div className={`px-6 py-4 border-b ${theme.inputBorder} flex items-center justify-between ${theme.modalHeaderBg}`}>

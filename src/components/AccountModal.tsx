@@ -23,7 +23,7 @@ export default function AccountModal({
 
   return (
     <div className={`fixed inset-0 z-50 flex items-center justify-center ${theme.modalOverlayBg} px-4 py-8 animate-fade-in`}>
-      <div className={`w-full max-w-sm ${theme.modalBg} ${theme.radiusLarge} overflow-hidden ${theme.modalBorder} shadow-2xl p-6 relative`}>
+      <div className={`w-full max-w-sm ${theme.modalBg} ${theme.radiusLarge} overflow-hidden ${theme.modalBorder} shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto my-auto`}>
         {/* Close Button */}
         <button
           onClick={onClose}
