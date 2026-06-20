@@ -18,7 +18,7 @@ let firebaseConfig = { ...clientCredentials };
 
 // If we are in the browser and env credentials are missing, check localStorage
 if (typeof window !== 'undefined' && !hasEnvCredentials) {
-  const localConfig = localStorage.getItem('launchpad_firebase_config');
+  const localConfig = localStorage.getItem('nazbasket_firebase_config');
   if (localConfig) {
     try {
       const parsed = JSON.parse(localConfig);
@@ -58,13 +58,13 @@ export function getFirebaseConfig() {
 }
 export function saveFirebaseConfig(config: typeof clientCredentials) {
   if (typeof window !== 'undefined') {
-    localStorage.setItem('launchpad_firebase_config', JSON.stringify(config));
+    localStorage.setItem('nazbasket_firebase_config', JSON.stringify(config));
     window.location.reload();
   }
 }
 export function clearFirebaseConfig() {
   if (typeof window !== 'undefined') {
-    localStorage.removeItem('launchpad_firebase_config');
+    localStorage.removeItem('nazbasket_firebase_config');
     window.location.reload();
   }
 }

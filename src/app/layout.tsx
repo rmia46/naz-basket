@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LaunchPad - Personal HTML App Hub",
+  title: "Naz Basket - Personal HTML App Hub",
   description: "Create, sync, and run your personal collection of custom HTML apps and widgets in one gorgeous flat iOS-style dashboard.",
 };
 

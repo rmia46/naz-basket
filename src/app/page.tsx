@@ -75,7 +75,7 @@ const PRESET_EMOJIS = [
 
 const CATEGORIES = ["All", "Utilities", "Productivity", "Games", "Fitness", "Entertainment", "Other"];
 
-export default function LaunchPad() {
+export default function NazBasket() {
   // Authentication State
   const [user, setUser] = useState<any>(null);
   const [authLoading, setAuthLoading] = useState(true);
@@ -288,7 +288,7 @@ export default function LaunchPad() {
 </head>
 <body>
   <h1>My Custom App</h1>
-  <button onclick="alert('Hello from LaunchPad!')">Click Me</button>
+  <button onclick="alert('Hello from Naz Basket!')">Click Me</button>
 </body>
 </html>`);
     setFormIcon("🚀");
@@ -410,7 +410,7 @@ export default function LaunchPad() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">Firebase Config Required</h1>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">LaunchPad needs Firestore & Google Auth credentials</p>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400">Naz Basket needs Firestore & Google Auth credentials</p>
               </div>
             </div>
 
@@ -435,7 +435,7 @@ export default function LaunchPad() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. launchpad-app-123"
+                  placeholder="e.g. nazbasket"
                   value={wizardProjectId}
                   onChange={(e) => setWizardProjectId(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
@@ -459,7 +459,7 @@ export default function LaunchPad() {
                   <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1">Auth Domain (Optional)</label>
                   <input
                     type="text"
-                    placeholder="launchpad-app-123.firebaseapp.com"
+                    placeholder="nazbasket.firebaseapp.com"
                     value={wizardAuthDomain}
                     onChange={(e) => setWizardAuthDomain(e.target.value)}
                     className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
@@ -469,7 +469,7 @@ export default function LaunchPad() {
                   <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1">Storage Bucket (Optional)</label>
                   <input
                     type="text"
-                    placeholder="launchpad-app-123.appspot.com"
+                    placeholder="nazbasket.firebasestorage.app"
                     value={wizardStorageBucket}
                     onChange={(e) => setWizardStorageBucket(e.target.value)}
                     className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
@@ -531,7 +531,7 @@ export default function LaunchPad() {
         <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shadow font-bold text-lg">🚀</div>
-            <span className="font-bold text-zinc-900 dark:text-white tracking-tight">LaunchPad</span>
+            <span className="font-bold text-zinc-900 dark:text-white tracking-tight">Naz Basket</span>
           </div>
           {!hasEnvCredentials && (
             <button
@@ -609,7 +609,7 @@ export default function LaunchPad() {
 
         {/* Footer */}
         <footer className="w-full text-center py-6 text-xs text-zinc-400 border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900 mt-12">
-          &copy; {new Date().getFullYear()} LaunchPad. Powered by Firebase.
+          &copy; {new Date().getFullYear()} Naz Basket. Powered by Firebase.
         </footer>
 
         {/* Wizard Dialog (if user explicitly chooses manual settings config on login) */}
@@ -633,7 +633,7 @@ export default function LaunchPad() {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. launchpad-app-123"
+                      placeholder="e.g. nazbasket"
                       value={wizardProjectId}
                       onChange={(e) => setWizardProjectId(e.target.value)}
                       className="w-full px-3.5 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none text-sm"
@@ -684,7 +684,7 @@ export default function LaunchPad() {
           <div>
             <span className="text-xs font-bold text-zinc-400 dark:text-zinc-500 tracking-widest">{currentDateString}</span>
             <div className="flex items-center gap-2 mt-0.5">
-              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">LaunchPad</h1>
+              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Naz Basket</h1>
               {isEditMode && (
                 <span className="text-xs bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-400 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
                   Edit Mode

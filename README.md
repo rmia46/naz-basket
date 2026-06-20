@@ -1,6 +1,6 @@
-# LaunchPad 🚀 - Custom HTML App Hub
+# Naz Basket 🚀 - Custom HTML App Hub
 
-**LaunchPad** is a personal app collection manager that acts as a "home screen" for your custom HTML mini-apps, widgets, and external web links. It runs on **Next.js 16** with **Tailwind CSS**, styled with a **flat, desktop-and-mobile responsive iOS layout** (without glassmorphism or filter blurs).
+**Naz Basket** is a personal app collection manager that acts as a "home screen" for your custom HTML mini-apps, widgets, and external web links. It runs on **Next.js 16** with **Tailwind CSS**, styled with a **flat, desktop-and-mobile responsive iOS layout** (without glassmorphism or filter blurs).
 
 All configuration is backed by **Firebase Auth (Google Sign-In)** and **Cloud Firestore** for automated, real-time database sync across your devices.
 
@@ -13,7 +13,7 @@ All configuration is backed by **Firebase Auth (Google Sign-In)** and **Cloud Fi
 4. **Layout Edit Mode**: A custom wiggle/wobble animation with edit/delete badges that makes configuring your layout easy and fun.
 5. **Quick-Search & Favorites**: Pin most-used widgets to the top of your deck and instant search.
 6. **Iframe Controller**: Full-screen sandboxed app runner with a flat bottom control tray containing Exit Home, Refresh App, and Open URL in tab (fallback for iframe blockers).
-7. **Firebase Config Wizard**: Zero initial configuration! If you run it without environment variables, LaunchPad opens a beautiful credentials wizard that saves settings locally in your browser (`localStorage`).
+7. **Firebase Config Wizard**: Zero initial configuration! If you run it without environment variables, Naz Basket opens a beautiful credentials wizard that saves settings locally in your browser (`localStorage`).
 
 ---
 
@@ -36,7 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🚀 Firebase Setup & Configuration
 
-There are **two ways** to initialize Firebase in LaunchPad:
+There are **two ways** to initialize Firebase in Naz Basket:
 
 ### Method A: Setup Wizard (No Code/Easiest)
 1. Run the app locally or open your hosted deployment.
