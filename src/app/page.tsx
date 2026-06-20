@@ -160,6 +160,7 @@ export default function NazBasket() {
   const [isWizardOpen, setIsWizardOpen] = useState(false);
   const [isAddEditModalOpen, setIsAddEditModalOpen] = useState(false);
   const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [selectedAppForEdit, setSelectedAppForEdit] = useState<CustomApp | null>(null);
 
@@ -719,9 +720,12 @@ export default function NazBasket() {
         {/* Footer */}
         <footer className="w-full text-center py-6 text-xs text-zinc-400 border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900 mt-12 shrink-0">
           &copy; {new Date().getFullYear()} Naz Basket. Powered by Firebase. &bull;{" "}
-          <Link href="/about" className="text-blue-600 dark:text-blue-400 hover:underline">
+          <button
+            onClick={() => setIsAboutOpen(true)}
+            className="text-blue-600 dark:text-blue-400 hover:underline cursor-pointer bg-transparent border-none p-0 inline font-semibold"
+          >
             About
-          </Link>
+          </button>
         </footer>
 
         {/* Wizard Dialog (if user explicitly chooses manual settings config on login) */}
@@ -837,13 +841,13 @@ export default function NazBasket() {
             </button>
 
             {/* About Page Link */}
-            <Link
-              href="/about"
+            <button
+              onClick={() => setIsAboutOpen(true)}
               className="p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-900 rounded-full transition-all active:scale-95 shadow-sm cursor-pointer"
               title="About Naz Basket"
             >
               <HelpCircle className="w-5 h-5" />
-            </Link>
+            </button>
 
             {/* Edit Mode Button */}
             <button
@@ -1350,6 +1354,163 @@ export default function NazBasket() {
           </div>
         </div>
       )}
+      {/* 8. About App Modal Popup */}
+      {isAboutOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-8 animate-fade-in">
+          <div className="w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl flex flex-col max-h-[85vh]">
+            
+            {/* Header */}
+            <div className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 shrink-0">
+              <div className="flex items-center gap-2">
+                <img src="/logo.jpg" alt="Naz Basket Logo" className="w-7 h-7 rounded-md shadow-sm object-cover" />
+                <span className="font-black text-lg tracking-tight select-none">
+                  Naz<span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-bold">Basket</span>
+                </span>
+              </div>
+              <button
+                onClick={() => setIsAboutOpen(false)}
+                className="p-1.5 rounded-full text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-100 transition-colors cursor-pointer"
+                title="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Scrollable Body */}
+            <div className="p-6 md:p-8 overflow-y-auto space-y-8 flex-1">
+              
+              {/* Hero Banner */}
+              <div className="text-center space-y-3">
+                <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-600 p-0.5 shadow-md">
+                  <div className="w-full h-full bg-white dark:bg-zinc-950 rounded-2xl flex items-center justify-center overflow-hidden">
+                    <img src="/logo.jpg" alt="Naz Basket Logo" className="w-[85%] h-[85%] object-cover rounded-xl" />
+                  </div>
+                </div>
+                <div className="space-y-0.5">
+                  <h3 className="text-2xl font-black tracking-tight text-zinc-900 dark:text-white">
+                    About <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">Naz Basket</span>
+                  </h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
+                    Personal Single-File HTML Application Hub & Runner
+                  </p>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="space-y-2">
+                <h4 className="font-extrabold text-sm text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-800 pb-1.5">
+                  Overview
+                </h4>
+                <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                  Naz Basket is a lightweight, cloud-synced home screen designed to host, run, and organize custom single-file HTML applications, widgets, and external URLs. Inspired by modern dashboard and hub designs, it provides fully responsive app grids, folders, search, categories, and wiggle animation edit controls. All applications run in sandboxed iframes, keeping your custom code isolated and safe.
+                </p>
+              </div>
+
+              {/* Grid: Author & Repo */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Author Card */}
+                <div className="bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-200/60 dark:border-zinc-800/80 rounded-xl p-4 flex items-start gap-3">
+                  <div className="p-2.5 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 rounded-lg">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">Author</span>
+                    <span className="font-extrabold text-sm text-zinc-900 dark:text-white block">Roman Mia</span>
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium">Project Architect & Developer</p>
+                  </div>
+                </div>
+
+                {/* Source Code Card */}
+                <div className="bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-200/60 dark:border-zinc-800/80 rounded-xl p-4 flex items-start gap-3">
+                  <div className="p-2.5 bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-400 rounded-lg">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                    </svg>
+                  </div>
+                  <div className="space-y-0.5 block min-w-0 flex-1">
+                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">Source Code</span>
+                    <a
+                      href="https://github.com/rmia46/naz-basket"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-extrabold text-sm text-purple-600 dark:text-purple-400 hover:underline block truncate"
+                    >
+                      GitHub Repository
+                    </a>
+                    <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 block truncate" title="git@github.com:rmia46/naz-basket.git">
+                      rmia46/naz-basket
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Core Features */}
+              <div className="space-y-4">
+                <h4 className="font-extrabold text-sm text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-800 pb-1.5">
+                  Technical Architecture
+                </h4>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5">
+                      <svg className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                      <span className="font-bold text-xs text-zinc-850 dark:text-zinc-100">Sandboxed Runner</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Applications run inside isolated, custom-configured iFrame sandbox grids, preventing security leaks or unwanted cookie sharing.
+                    </p>
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5">
+                      <svg className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" /><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3" /></svg>
+                      <span className="font-bold text-xs text-zinc-850 dark:text-zinc-100">Firebase Synchronization</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Built using Google Firebase Authentication and Firestore to synchronize custom apps, widgets, and directories seamlessly.
+                    </p>
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5">
+                      <svg className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2" /><polygon points="2 17 12 22 22 17" /><polygon points="2 12 17 22 12" /></svg>
+                      <span className="font-bold text-xs text-zinc-850 dark:text-zinc-100">Dynamic Workspace Layout</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Features a customizable, flat card grid with favorites, categories, global search, and layout-shifting controls.
+                    </p>
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+                      <span className="font-bold text-xs text-zinc-850 dark:text-zinc-100">AI Companion Hub</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Integrated prompt engineering templates pointing directly to Gemini and DeepSeek for writing modular HTML code snippets.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/30 flex justify-end shrink-0">
+              <button
+                onClick={() => setIsAboutOpen(false)}
+                className="px-4 py-2 rounded-lg text-xs font-bold bg-zinc-950 hover:bg-zinc-800 text-white dark:bg-zinc-50 dark:hover:bg-zinc-200 dark:text-zinc-950 cursor-pointer"
+              >
+                Close About
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* 6. Logout Confirmation Modal */}
       {isLogoutConfirmOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-8">
