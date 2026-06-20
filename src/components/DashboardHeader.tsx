@@ -64,7 +64,7 @@ export default function DashboardHeader({
             className={`p-2.5 ${theme.radiusFull} transition-all active:scale-95 shadow-sm border border-zinc-200 dark:border-zinc-900 cursor-pointer ${
               isGeminiOpen
                 ? `${theme.accentBg} text-white border-transparent`
-                : `bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted}`
+                : `bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted} ${theme.headerBtnHover}`
             }`}
             title="AI Companion"
           >
@@ -74,7 +74,7 @@ export default function DashboardHeader({
           {/* About Page Link */}
           <button
             onClick={() => setIsAboutOpen(true)}
-            className={`p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted} border border-zinc-200 dark:border-zinc-900 ${theme.radiusFull} transition-all active:scale-95 shadow-sm cursor-pointer`}
+            className={`p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted} border border-zinc-200 dark:border-zinc-900 ${theme.radiusFull} transition-all active:scale-95 shadow-sm cursor-pointer ${theme.headerBtnHover}`}
             title="About Naz Basket"
           >
             <BookOpen className="w-5 h-5" />
@@ -83,7 +83,7 @@ export default function DashboardHeader({
           {/* Help Guide Popup Link */}
           <button
             onClick={() => setIsHelpOpen(true)}
-            className={`p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted} border border-zinc-200 dark:border-zinc-900 ${theme.radiusFull} transition-all active:scale-95 shadow-sm cursor-pointer`}
+            className={`p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted} border border-zinc-200 dark:border-zinc-900 ${theme.radiusFull} transition-all active:scale-95 shadow-sm cursor-pointer ${theme.headerBtnHover}`}
             title="Help Guide"
           >
             <HelpCircle className="w-5 h-5" />
@@ -95,7 +95,7 @@ export default function DashboardHeader({
             className={`p-2.5 ${theme.radiusFull} transition-all active:scale-95 shadow-sm border border-zinc-200 dark:border-zinc-900 cursor-pointer ${
               isEditMode
                 ? "bg-rose-600 text-white border-transparent"
-                : `bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted}`
+                : `bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted} ${theme.headerBtnHover}`
             }`}
             title={isEditMode ? "Done editing" : "Edit screen layout"}
           >
@@ -105,7 +105,7 @@ export default function DashboardHeader({
           {/* Logout */}
           <button
             onClick={() => setIsLogoutConfirmOpen(true)}
-            className={`p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted} border border-zinc-200 dark:border-zinc-900 ${theme.radiusFull} transition-all active:scale-95 shadow-sm cursor-pointer`}
+            className={`p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 ${theme.textMuted} border border-zinc-200 dark:border-zinc-900 ${theme.radiusFull} transition-all active:scale-95 shadow-sm cursor-pointer ${theme.headerBtnDangerHover}`}
             title="Sign Out"
           >
             <LogOut className="w-5 h-5" />

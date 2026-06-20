@@ -52,6 +52,8 @@ export const theme = {
   
   // Selection and hover
   selectionBg: "selection:bg-teal-500 selection:text-white",
+  headerBtnHover: "hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 hover:shadow-sm",
+  headerBtnDangerHover: "hover:border-rose-600 hover:text-rose-600 dark:hover:text-rose-400 hover:shadow-sm",
   
   // Input fields
   inputBg: "bg-zinc-50 dark:bg-zinc-950",
