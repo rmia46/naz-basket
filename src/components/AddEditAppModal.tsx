@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { X, Code, Globe, HelpCircle, Check, AlertCircle, Star } from "lucide-react";
 import { CustomApp, ICON_COMPONENTS, ICON_COLORS, PRESET_ICONS, CATEGORIES } from "@/lib/types";
 import { theme } from "@/lib/theme";
+import { validateHTML, HtmlValidationResult } from "@/lib/htmlValidator";
 
 interface AddEditAppModalProps {
   isOpen: boolean;
@@ -37,6 +38,18 @@ export default function AddEditAppModal({
   const [formFavorite, setFormFavorite] = useState(false);
   const [formError, setFormError] = useState("");
   const [isSavingApp, setIsSavingApp] = useState(false);
+  const [htmlValidation, setHtmlValidation] = useState<HtmlValidationResult | null>(null);
+  const [showValidationWarnings, setShowValidationWarnings] = useState(false);
+
+  // Validate HTML code changes
+  useEffect(() => {
+    if (formType === "html" && formContent.trim() !== "") {
+      const result = validateHTML(formContent);
+      setHtmlValidation(result);
+    } else {
+      setHtmlValidation(null);
+    }
+  }, [formContent, formType]);
 
   // Sync state with selected app when modal opens
   useEffect(() => {
@@ -296,14 +309,48 @@ export default function AddEditAppModal({
             </div>
             
             {formType === "html" ? (
-              <textarea
-                rows={10}
-                required
-                placeholder="<!DOCTYPE html>..."
-                value={formContent}
-                onChange={(e) => setFormContent(e.target.value)}
-                className={`w-full px-4 py-3 ${theme.radiusSmall} ${theme.inputBorder} ${theme.inputBg} ${theme.textPrimary} font-mono text-xs ${theme.inputFocus}`}
-              />
+              <>
+                <textarea
+                  rows={10}
+                  required
+                  placeholder="<!DOCTYPE html>..."
+                  value={formContent}
+                  onChange={(e) => setFormContent(e.target.value)}
+                  className={`w-full px-4 py-3 ${theme.radiusSmall} ${theme.inputBorder} ${theme.inputBg} ${theme.textPrimary} font-mono text-xs ${theme.inputFocus}`}
+                />
+                
+                {htmlValidation && (htmlValidation.errors.length > 0 || htmlValidation.warnings.length > 0) && (
+                  <div className={`mt-2 p-3 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 ${theme.radiusSmall} text-xs`}>
+                    <button
+                      type="button"
+                      onClick={() => setShowValidationWarnings(!showValidationWarnings)}
+                      className="w-full flex items-center justify-between font-bold text-amber-800 dark:text-amber-300 text-left cursor-pointer focus:outline-none"
+                    >
+                      <span className="flex items-center gap-1.5">
+                        <AlertCircle className="w-4 h-4 shrink-0 text-amber-600 dark:text-amber-400" />
+                        <span>HTML code might be incorrect and may not render properly</span>
+                      </span>
+                      <span className="text-[10px] bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 px-1.5 py-0.5 rounded">
+                        {htmlValidation.errors.length + htmlValidation.warnings.length} issue(s) {showValidationWarnings ? "▲" : "▼"}
+                      </span>
+                    </button>
+
+                    {showValidationWarnings && (
+                      <div className="mt-2.5 pt-2 border-t border-amber-200/50 dark:border-amber-900/30 space-y-2 max-h-40 overflow-y-auto pr-1">
+                        {[...htmlValidation.errors, ...htmlValidation.warnings].map((issue, idx) => (
+                          <div key={idx} className="flex gap-2 text-[11px] leading-relaxed">
+                            <span className="font-extrabold text-amber-600 dark:text-amber-400 select-none">•</span>
+                            <div className="space-y-0.5">
+                              <p className="font-bold text-zinc-800 dark:text-zinc-200">{issue.message}</p>
+                              <p className="text-zinc-500 dark:text-zinc-400">{issue.detail}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </>
             ) : (
               <input
                 type="text"
