@@ -377,7 +377,9 @@ export default function NazBasket() {
         </footer>
 
         {/* Wizard Dialog Modal */}
-        <FirebaseWizard isModal={true} onClose={() => setIsWizardOpen(false)} />
+        {isWizardOpen && (
+          <FirebaseWizard isModal={true} onClose={() => setIsWizardOpen(false)} />
+        )}
 
         {/* About Dialog Modal */}
         <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
