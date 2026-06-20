@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
+import Link from "next/link";
 import {
   Plus,
   Search,
@@ -716,8 +717,11 @@ export default function NazBasket() {
         </main>
 
         {/* Footer */}
-        <footer className="w-full text-center py-6 text-xs text-zinc-400 border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900 mt-12">
-          &copy; {new Date().getFullYear()} Naz Basket. Powered by Firebase.
+        <footer className="w-full text-center py-6 text-xs text-zinc-400 border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900 mt-12 shrink-0">
+          &copy; {new Date().getFullYear()} Naz Basket. Powered by Firebase. &bull;{" "}
+          <Link href="/about" className="text-blue-600 dark:text-blue-400 hover:underline">
+            About
+          </Link>
         </footer>
 
         {/* Wizard Dialog (if user explicitly chooses manual settings config on login) */}
@@ -831,6 +835,15 @@ export default function NazBasket() {
             >
               <Sparkles className="w-5 h-5" />
             </button>
+
+            {/* About Page Link */}
+            <Link
+              href="/about"
+              className="p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-900 rounded-full transition-all active:scale-95 shadow-sm cursor-pointer"
+              title="About Naz Basket"
+            >
+              <HelpCircle className="w-5 h-5" />
+            </Link>
 
             {/* Edit Mode Button */}
             <button
