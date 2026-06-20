@@ -47,6 +47,7 @@ import DashboardHeader from "@/components/DashboardHeader";
 import CategoryPicker from "@/components/CategoryPicker";
 import AddEditAppModal from "@/components/AddEditAppModal";
 import BottomNav from "@/components/BottomNav";
+import AccountModal from "@/components/AccountModal";
 
 export default function NazBasket() {
   // Authentication State
@@ -74,6 +75,7 @@ export default function NazBasket() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isGeminiOpen, setIsGeminiOpen] = useState(false);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
 
   // Modal Form specific state
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
@@ -400,6 +402,7 @@ export default function NazBasket() {
         setIsAboutOpen={setIsAboutOpen}
         setIsHelpOpen={setIsHelpOpen}
         setIsLogoutConfirmOpen={setIsLogoutConfirmOpen}
+        onOpenAccount={() => setIsAccountOpen(true)}
       />
 
       {/* Filter and Search Bar Section */}
@@ -505,6 +508,15 @@ export default function NazBasket() {
         onLogoutConfirm={() => setIsLogoutConfirmOpen(true)}
       />
 
+      {/* Account Profile Dialog Modal */}
+      <AccountModal
+        isOpen={isAccountOpen}
+        onClose={() => setIsAccountOpen(false)}
+        user={user}
+        onLogoutConfirm={() => setIsLogoutConfirmOpen(true)}
+        onOpenAbout={() => setIsAboutOpen(true)}
+      />
+
       {/* Help Guide Modal Popup overlay */}
       <HelpModal
         isOpen={isHelpOpen}
@@ -531,7 +543,7 @@ export default function NazBasket() {
         setIsGeminiOpen={setIsGeminiOpen}
         isEditMode={isEditMode}
         setIsEditMode={setIsEditMode}
-        setIsAboutOpen={setIsAboutOpen}
+        setIsAccountOpen={setIsAccountOpen}
         setIsHelpOpen={setIsHelpOpen}
         activeRunningApp={activeRunningApp}
         setActiveRunningApp={setActiveRunningApp}

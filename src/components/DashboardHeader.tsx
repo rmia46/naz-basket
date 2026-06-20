@@ -13,6 +13,7 @@ interface DashboardHeaderProps {
   setIsAboutOpen: (open: boolean) => void;
   setIsHelpOpen: (open: boolean) => void;
   setIsLogoutConfirmOpen: (open: boolean) => void;
+  onOpenAccount: () => void;
 }
 
 export default function DashboardHeader({
@@ -24,6 +25,7 @@ export default function DashboardHeader({
   setIsAboutOpen,
   setIsHelpOpen,
   setIsLogoutConfirmOpen,
+  onOpenAccount,
 }: DashboardHeaderProps) {
   return (
     <header className="w-full max-w-6xl mx-auto px-4 pt-8 pb-4 shrink-0">
@@ -44,19 +46,22 @@ export default function DashboardHeader({
         </div>
 
         <div className="flex items-center gap-3">
-          {/* User Profile */}
-          <div className={`flex items-center gap-2.5 bg-white dark:bg-zinc-900 border ${theme.radiusFull} border-zinc-200 dark:border-zinc-900 pl-2.5 pr-4 py-1.5 shadow-sm text-sm`}>
+          {/* User Profile (Clickable Account Modal Trigger) */}
+          <button
+            onClick={onOpenAccount}
+            className={`hidden md:flex items-center gap-2.5 bg-white dark:bg-zinc-900 border ${theme.radiusFull} border-zinc-200 dark:border-zinc-900 pl-2.5 pr-4 py-1.5 shadow-sm hover:border-teal-500 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all active:scale-95 cursor-pointer text-sm font-semibold`}
+          >
             {user?.photoURL ? (
               <img src={user.photoURL} alt={user.displayName} className={`w-7 h-7 ${theme.radiusFull} shadow-inner`} />
             ) : (
-              <div className={`w-7 h-7 ${theme.radiusFull} bg-blue-600 text-white flex items-center justify-center font-bold text-xs uppercase`}>
+              <div className={`w-7 h-7 ${theme.radiusFull} bg-teal-600 text-white flex items-center justify-center font-bold text-xs uppercase`}>
                 {user?.displayName?.charAt(0) || "U"}
               </div>
             )}
-            <span className={`font-semibold max-w-[100px] truncate ${theme.textSecondary}`}>
+            <span className={`max-w-[100px] truncate ${theme.textSecondary}`}>
               {user?.displayName || "User"}
             </span>
-          </div>
+          </button>
 
           {/* Desktop-only Action Buttons */}
           <div className="hidden md:flex items-center gap-3">

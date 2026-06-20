@@ -10,7 +10,7 @@ interface BottomNavProps {
   setIsGeminiOpen: (open: boolean) => void;
   isEditMode: boolean;
   setIsEditMode: (mode: boolean) => void;
-  setIsAboutOpen: (open: boolean) => void;
+  setIsAccountOpen: (open: boolean) => void;
   setIsHelpOpen: (open: boolean) => void;
   activeRunningApp: any;
   setActiveRunningApp: (app: any) => void;
@@ -22,7 +22,7 @@ export default function BottomNav({
   setIsGeminiOpen,
   isEditMode,
   setIsEditMode,
-  setIsAboutOpen,
+  setIsAccountOpen,
   setIsHelpOpen,
   activeRunningApp,
   setActiveRunningApp,
@@ -98,7 +98,7 @@ export default function BottomNav({
 
       {/* Profile/About Tab */}
       <button
-        onClick={() => setIsAboutOpen(true)}
+        onClick={() => setIsAccountOpen(true)}
         className={`flex flex-col items-center gap-0.5 py-1 px-3 ${theme.radiusSmall} ${theme.textMuted} hover:${theme.textSecondary} cursor-pointer`}
       >
         {user?.photoURL ? (
