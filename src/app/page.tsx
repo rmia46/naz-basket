@@ -43,7 +43,8 @@ import {
   HelpCircle,
   Archive,
   LayoutGrid,
-  Sparkles
+  Sparkles,
+  Copy
 } from "lucide-react";
 import {
   auth,
@@ -163,6 +164,7 @@ export default function NazBasket() {
 
   // Gemini Sidebar State
   const [isGeminiOpen, setIsGeminiOpen] = useState(false);
+  const [copiedPromptId, setCopiedPromptId] = useState<number | null>(null);
 
   // Wizard Configuration State
   const [wizardApiKey, setWizardApiKey] = useState("");
@@ -1374,53 +1376,115 @@ export default function NazBasket() {
         <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 shrink-0">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-blue-600 animate-pulse" />
-            <span className="font-extrabold text-sm text-zinc-900 dark:text-white">Gemini Web App</span>
+            <span className="font-extrabold text-sm text-zinc-900 dark:text-white">Gemini Quick Launcher</span>
           </div>
-          <div className="flex items-center gap-2">
+          <button
+            onClick={() => setIsGeminiOpen(false)}
+            className="p-1.5 rounded-full text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer"
+            title="Close Panel"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Scrollable Container */}
+        <div className="flex-1 overflow-y-auto p-5 space-y-6 bg-zinc-50/50 dark:bg-zinc-950/20">
+          {/* Main Direct Launch Call-To-Action Card */}
+          <div className="p-5 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-md space-y-4">
+            <div className="space-y-1">
+              <h3 className="font-extrabold text-lg flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-yellow-300 fill-yellow-300 animate-bounce" />
+                Launch Gemini AI
+              </h3>
+              <p className="text-xs text-blue-100 leading-relaxed">
+                Google restricts embedding the Gemini web app in third-party frames due to security constraints. Open Gemini in a new browser tab to construct custom HTML pages.
+              </p>
+            </div>
+            
             <a
               href="https://gemini.google.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-full text-zinc-400 hover:text-blue-600 hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer transition-colors"
-              title="Open Gemini in New Tab"
+              className="inline-flex w-full items-center justify-center gap-2 px-4 py-3 bg-white text-blue-600 font-extrabold text-sm rounded-xl shadow-lg hover:bg-zinc-100 hover:scale-[1.01] transition-all cursor-pointer text-center"
             >
               <ExternalLink className="w-4 h-4" />
+              Open Gemini in New Tab
             </a>
-            <button
-              onClick={() => setIsGeminiOpen(false)}
-              className="p-1.5 rounded-full text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer"
-              title="Close Panel"
-            >
-              <X className="w-4 h-4" />
-            </button>
           </div>
-        </div>
 
-        {/* Info Box */}
-        <div className="p-4 bg-amber-50 dark:bg-amber-950/20 border-b border-amber-200/50 dark:border-amber-900/30 text-xs text-amber-800 dark:text-amber-300 shrink-0">
-          <p className="font-bold mb-1">💡 Sandbox Embed Notice</p>
-          <p className="mb-2">
-            Google restricts embedding the Gemini web app in third-party frames due to security constraints. If the screen below remains blank or shows a refusal error, launch it directly using the button below.
-          </p>
-          <a
-            href="https://gemini.google.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded font-bold transition-all text-[11px] shadow-sm cursor-pointer"
-          >
-            <ExternalLink className="w-3.5 h-3.5" />
-            Open Gemini in New Tab
-          </a>
-        </div>
+          {/* Quick Prompts Helper */}
+          <div className="space-y-3">
+            <div className="flex flex-col">
+              <h4 className="font-extrabold text-sm text-zinc-900 dark:text-white">Quick App Prompts</h4>
+              <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                Click a prompt to copy it, then paste it in your Gemini tab to generate single-file HTML apps!
+              </p>
+            </div>
 
-        {/* Embedded Iframe */}
-        <div className="flex-1 bg-zinc-100 dark:bg-zinc-950 relative">
-          <iframe
-            src="https://gemini.google.com"
-            className="w-full h-full border-none"
-            title="Google Gemini"
-            sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
-          />
+            <div className="space-y-3">
+              {[
+                {
+                  id: 1,
+                  title: "Minimalist Pomodoro Timer",
+                  description: "A beautiful Pomodoro timer with custom controls, clean dark theme, and sound alerts.",
+                  text: "Write a complete single-file HTML page with CSS and JavaScript containing a minimalist Pomodoro Timer. Use a premium dark mode aesthetic (zinc/slate color palette), circular progress ring, settings to customize Pomodoro/short break/long break lengths, sound alert support using standard Web Audio API (so no external asset links are needed), and clean responsive styles. Do not include markdown blocks, just return clean HTML."
+                },
+                {
+                  id: 2,
+                  title: "Sticky Notes Board",
+                  description: "An interactive board to create, color-code, and delete sticky note widgets.",
+                  text: "Create a complete single-file HTML/CSS/JS app that serves as a Sticky Notes Board. Users should be able to create new notes, choose their background colors (pastel shades), edit text in-place, and drag them around or delete them. Save notes to localStorage so they persist. Ensure it has a gorgeous flat layout and looks premium. Just return raw HTML."
+                },
+                {
+                  id: 3,
+                  title: "Rich Markdown Editor",
+                  description: "A side-by-side markdown editor and renderer using lightweight libraries.",
+                  text: "Build a single-file HTML app that functions as a Markdown Editor. It should have a split-pane layout: a textarea on the left to write markdown, and a formatted preview on the right. Include standard markdown formatting shortcuts (bold, italic, header, list). Use Tailwind CSS via CDN for styling and a simple parser or pure JS renderer to convert it to HTML. Keep the UI extremely clean, minimal, and responsive. Just raw HTML code."
+                },
+                {
+                  id: 4,
+                  title: "Interactive Calculator",
+                  description: "A fully functional calculator with a sleek dashboard design.",
+                  text: "Design a complete single-file HTML calculator app. It should feature a gorgeous, tactile layout resembling premium hardware (modern flat grid, clean fonts), support basic operations, decimal numbers, backspace, and percentage. Animate button presses with subtle micro-scale feedback. Just return the clean HTML file."
+                },
+                {
+                  id: 5,
+                  title: "Habit Tracker Grid",
+                  description: "A clean calendar layout to log and visualize habits.",
+                  text: "Create a complete single-file HTML habit tracker. Users can define habits, and check off bubbles for each day of the week. Display a progress bar for completion rates. Persist checking state via localStorage. Style it with a beautiful, clean layout using a vibrant color palette (indigo/emerald gradients). Just output the raw HTML."
+                }
+              ].map((p) => (
+                <div
+                  key={p.id}
+                  onClick={() => {
+                    navigator.clipboard.writeText(p.text);
+                    setCopiedPromptId(p.id);
+                    setTimeout(() => setCopiedPromptId(null), 2000);
+                  }}
+                  className="group relative p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-sm cursor-pointer transition-all duration-200 flex flex-col justify-between"
+                >
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-extrabold text-xs text-zinc-900 dark:text-zinc-50 group-hover:text-blue-600 transition-colors">
+                        {p.title}
+                      </span>
+                      {copiedPromptId === p.id ? (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                          <Check className="w-3.5 h-3.5" />
+                          Copied!
+                        </span>
+                      ) : (
+                        <Copy className="w-3.5 h-3.5 text-zinc-400 group-hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-all" />
+                      )}
+                    </div>
+                    <p className="text-[11px] text-zinc-400 dark:text-zinc-500 leading-normal">
+                      {p.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
