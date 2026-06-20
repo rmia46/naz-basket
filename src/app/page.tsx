@@ -561,7 +561,7 @@ export default function NazBasket() {
         {/* Elegant top bar */}
         <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-md bg-blue-600 text-white flex items-center justify-center shadow font-bold text-lg">🚀</div>
+            <img src="/logo.jpg" alt="Naz Basket Logo" className="w-8 h-8 rounded-md shadow-sm object-cover shrink-0" />
             <span className="font-bold text-zinc-900 dark:text-white tracking-tight">Naz Basket</span>
           </div>
           {!hasEnvCredentials && (
@@ -714,7 +714,8 @@ export default function NazBasket() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <span className="text-xs font-bold text-zinc-400 dark:text-zinc-500 tracking-widest">{currentDateString}</span>
-            <div className="flex items-center gap-2 mt-0.5">
+            <div className="flex items-center gap-2.5 mt-0.5">
+              <img src="/logo.jpg" alt="Naz Basket Logo" className="w-9 h-9 rounded-md shadow-sm object-cover shrink-0" />
               <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Naz Basket</h1>
               {isEditMode && (
                 <span className="text-xs bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-400 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
