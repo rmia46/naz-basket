@@ -1376,7 +1376,7 @@ export default function NazBasket() {
         <div className="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 shrink-0">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-blue-600 animate-pulse" />
-            <span className="font-extrabold text-sm text-zinc-900 dark:text-white">Gemini Quick Launcher</span>
+            <span className="font-extrabold text-sm text-zinc-900 dark:text-white">AI Companion Hub</span>
           </div>
           <button
             onClick={() => setIsGeminiOpen(false)}
@@ -1389,27 +1389,57 @@ export default function NazBasket() {
 
         {/* Scrollable Container */}
         <div className="flex-1 overflow-y-auto p-5 space-y-6 bg-zinc-50/50 dark:bg-zinc-950/20">
-          {/* Main Direct Launch Call-To-Action Card */}
-          <div className="p-5 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-md space-y-4">
-            <div className="space-y-1">
-              <h3 className="font-extrabold text-lg flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-yellow-300 fill-yellow-300 animate-bounce" />
+          {/* Embedding Notice */}
+          <div className="p-3.5 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed shrink-0">
+            <span className="font-bold text-zinc-700 dark:text-zinc-300 block mb-0.5">🔒 Browser Security Notice</span>
+            Major AI providers (Gemini, DeepSeek, ChatGPT, Claude) block embedding in iframes via <code className="text-blue-600 dark:text-blue-400 font-mono text-[10px]">frame-ancestors 'none'</code> headers. Use the links below to launch them safely in a new tab.
+          </div>
+
+          {/* Launch Buttons Grid */}
+          <div className="grid grid-cols-1 gap-3">
+            {/* Gemini Launcher Card */}
+            <div className="p-4 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-sm space-y-3">
+              <div className="space-y-0.5">
+                <h4 className="font-extrabold text-sm flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-yellow-300 fill-yellow-300" />
+                  Google Gemini
+                </h4>
+                <p className="text-[11px] text-blue-100">
+                  Ideal for clean coding, structured HTML page design, and layout ideas.
+                </p>
+              </div>
+              <a
+                href="https://gemini.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-1.5 px-3 py-2 bg-white text-blue-600 font-extrabold text-xs rounded-lg hover:bg-zinc-100 transition-all cursor-pointer text-center shadow-sm"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
                 Launch Gemini AI
-              </h3>
-              <p className="text-xs text-blue-100 leading-relaxed">
-                Google restricts embedding the Gemini web app in third-party frames due to security constraints. Open Gemini in a new browser tab to construct custom HTML pages.
-              </p>
+              </a>
             </div>
-            
-            <a
-              href="https://gemini.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 px-4 py-3 bg-white text-blue-600 font-extrabold text-sm rounded-xl shadow-lg hover:bg-zinc-100 hover:scale-[1.01] transition-all cursor-pointer text-center"
-            >
-              <ExternalLink className="w-4 h-4" />
-              Open Gemini in New Tab
-            </a>
+
+            {/* DeepSeek Launcher Card */}
+            <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-600 to-blue-600 text-white shadow-sm space-y-3">
+              <div className="space-y-0.5">
+                <h4 className="font-extrabold text-sm flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-cyan-200 fill-cyan-200" />
+                  DeepSeek Chat
+                </h4>
+                <p className="text-[11px] text-cyan-100">
+                  Excellent for logic, algorithms, writing script details, and debugging widgets.
+                </p>
+              </div>
+              <a
+                href="https://chat.deepseek.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-1.5 px-3 py-2 bg-white text-cyan-700 font-extrabold text-xs rounded-lg hover:bg-zinc-100 transition-all cursor-pointer text-center shadow-sm"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                Launch DeepSeek Chat
+              </a>
+            </div>
           </div>
 
           {/* Quick Prompts Helper */}
@@ -1417,7 +1447,7 @@ export default function NazBasket() {
             <div className="flex flex-col">
               <h4 className="font-extrabold text-sm text-zinc-900 dark:text-white">Quick App Prompts</h4>
               <p className="text-xs text-zinc-400 dark:text-zinc-500">
-                Click a prompt to copy it, then paste it in your Gemini tab to generate single-file HTML apps!
+                Click a prompt to copy it, then paste it in your AI chat tab to generate single-file HTML apps!
               </p>
             </div>
 
