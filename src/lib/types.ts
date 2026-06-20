@@ -23,7 +23,13 @@ import {
   Globe,
   BookOpen,
   Search,
-  CheckSquare
+  CheckSquare,
+  Wrench,
+  Laptop,
+  FileCode,
+  AppWindow,
+  Play,
+  Compass
 } from "lucide-react";
 
 // Interface for custom apps stored in Firestore
@@ -77,7 +83,13 @@ export const ICON_COMPONENTS: Record<string, React.ComponentType<any>> = {
   Link: LinkIcon,
   Globe,
   BookOpen,
-  Search
+  Search,
+  Wrench,
+  Laptop,
+  FileCode,
+  AppWindow,
+  Play,
+  Compass
 };
 
 export const PRESET_ICONS = [
@@ -85,7 +97,9 @@ export const PRESET_ICONS = [
   "Clock", "Palette", "Music", "Utensils", "Calendar",
   "MessageSquare", "Settings", "TrendingUp", "CloudLightning",
   "Lightbulb", "DollarSign", "Map", "Film", "Target", "Calculator",
-  "Link", "Globe", "BookOpen", "Search"
+  "Link", "Globe", "BookOpen", "Search",
+  "Wrench", "Laptop", "FileCode", "AppWindow", "Play", "Compass"
 ];
 
 export const CATEGORIES = ["All", "Utilities", "Productivity", "Games", "Fitness", "Entertainment", "Other"];
+

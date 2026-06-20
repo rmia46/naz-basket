@@ -9,6 +9,40 @@ interface AiCompanionHubProps {
   onClose: () => void;
 }
 
+// Icons for the AI platforms
+const GeminiIcon = () => (
+  <svg className="w-5 h-5 text-purple-500 dark:text-purple-400" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2a1 1 0 0 1 1 1c0 4.97 4.03 9 9 9a1 1 0 0 1 0 2c-4.97 0-9 4.03-9 9a1 1 0 0 1-2 0c0-4.97-4.03-9-9-9a1 1 0 0 1 0-2c4.97 0 9-4.03 9-9a1 1 0 0 1 1-1Z" />
+  </svg>
+);
+
+const DeepSeekIcon = () => (
+  <svg className="w-5 h-5 text-blue-500 dark:text-blue-400" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Zm-2-14.5a2.5 2.5 0 1 1 4 2.05v3.45a2.5 2.5 0 1 1-4 0V9.55Z" />
+  </svg>
+);
+
+const ClaudeIcon = () => (
+  <svg className="w-5 h-5 text-amber-600 dark:text-amber-500" viewBox="0 0 24 24" fill="currentColor">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 2a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-3 0v-3A1.5 1.5 0 0 1 12 2zm0 14a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-3 0v-3A1.5 1.5 0 0 1 12 16zm-7-4a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 0 3h-3A1.5 1.5 0 0 1 5 12zm11 0a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 1-1.5-1.5zm-8.879-4.879a1.5 1.5 0 0 1 2.122 0l2.121 2.121a1.5 1.5 0 0 1-2.121 2.121L7.121 9.243a1.5 1.5 0 0 1 0-2.122zm7.778 7.778a1.5 1.5 0 0 1 2.122 0l2.121 2.121a1.5 1.5 0 0 1-2.121 2.122l-2.121-2.122a1.5 1.5 0 0 1 0-2.121z" />
+  </svg>
+);
+
+const GrokIcon = () => (
+  <svg className="w-5 h-5 text-zinc-900 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+    <path d="M4 20L20 4M9 20h11M4 4h11" />
+  </svg>
+);
+
+const THEME_ALIGNMENT_PROMPT = `Please design the HTML widget to match the Naz Basket visual system:
+- Font: Use "Plus Jakarta Sans" for primary UI and "JetBrains Mono" for numbers/code. Include them from Google Fonts.
+- Styling Framework: Tailwind CSS CDN is supported (<script src="https://cdn.tailwindcss.com"></script>).
+- Theme colors: A premium dark mode. Page background should be zinc-950 (#09090b), panels/container cards should be zinc-900 (#18181b), and thin borders should be zinc-800 (#27272a).
+- Accent highlights: Electric teal/cyan gradient (from-cyan-500 to-teal-500). Buttons and icons should use teal accent text/badges (text-teal-400, bg-teal-950/40) or solid teal background (bg-teal-600, hover:bg-teal-700).
+- Borders & Corners: Cards should use rounded-2xl or rounded-xl corners. Inputs and buttons should use rounded-lg corners.
+- Feel: Sleek, flat, minimal layout with glassmorphic dropdowns/nav elements (backdrop-blur-md) and micro-interactions. Return ONLY raw HTML code.`;
+
 const PROMPTS = [
   {
     id: 1,
@@ -53,7 +87,7 @@ export default function AiCompanionHub({ isOpen, onClose }: AiCompanionHubProps)
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-80 sm:w-[480px] ${theme.modalBg} border-l ${theme.inputBorder} shadow-2xl transition-transform duration-300 ease-in-out z-40 flex flex-col ${
+      className={`fixed top-0 right-0 h-full w-80 sm:w-[480px] ${theme.modalBg} border-l ${theme.inputBorder} shadow-2xl transition-transform duration-300 ease-in-out z-45 flex flex-col ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
@@ -77,53 +111,115 @@ export default function AiCompanionHub({ isOpen, onClose }: AiCompanionHubProps)
         {/* Embedding Notice */}
         <div className={`p-3.5 ${theme.inputBg} border ${theme.inputBorder} ${theme.radiusMedium} text-[11px] ${theme.textMuted} leading-relaxed shrink-0`}>
           <span className={`font-bold ${theme.textSecondary} block mb-0.5`}>🔒 Browser Security Notice</span>
-          Major AI providers (Gemini, DeepSeek, ChatGPT, Claude) block embedding in iframes via <code className={`text-cyan-600 dark:text-cyan-400 font-mono text-[10px]`}>frame-ancestors 'none'</code> headers. Use the links below to launch them safely in a new tab.
+          Major AI providers (Gemini, DeepSeek, ChatGPT, Claude) block embedding in iframes. Launch them in a new tab below.
         </div>
 
-        {/* Launch Buttons Grid */}
-        <div className="grid grid-cols-1 gap-3">
-          {/* Gemini Launcher Card */}
-          <div className={`p-4 ${theme.radiusMedium} bg-gradient-to-br ${theme.accentGradient} text-white shadow-sm space-y-3`}>
-            <div className="space-y-0.5">
-              <h4 className="font-extrabold text-sm flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-yellow-300 fill-yellow-300" />
-                Google Gemini
-              </h4>
-              <p className="text-[11px] text-teal-100">
-                Ideal for clean coding, structured HTML page design, and layout ideas.
-              </p>
+        {/* Launch Buttons Grid (Clean Icons) */}
+        <div className="grid grid-cols-2 gap-3 shrink-0">
+          <a
+            href="https://gemini.google.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-3 p-3 bg-white dark:bg-zinc-900 border ${theme.inputBorder} ${theme.radiusMedium} hover:border-teal-500 transition-all group cursor-pointer`}
+          >
+            <div className="p-2 bg-purple-50 dark:bg-purple-950/30 rounded-lg group-hover:scale-105 transition-transform shrink-0">
+              <GeminiIcon />
             </div>
-            <a
-              href="https://gemini.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex w-full items-center justify-center gap-1.5 px-3 py-2 bg-white text-teal-600 font-extrabold text-xs ${theme.radiusSmall} hover:bg-zinc-100 transition-all cursor-pointer text-center shadow-sm`}
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Launch Gemini AI
-            </a>
-          </div>
+            <div className="flex-1 min-w-0">
+              <h4 className={`text-xs font-bold ${theme.textPrimary} flex items-center gap-1`}>
+                Gemini
+                <ExternalLink className="w-2.5 h-2.5 text-zinc-400 group-hover:text-teal-500" />
+              </h4>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate">Google AI</p>
+            </div>
+          </a>
 
-          {/* DeepSeek Launcher Card */}
-          <div className={`p-4 ${theme.radiusMedium} bg-gradient-to-br from-cyan-600 to-blue-600 text-white shadow-sm space-y-3`}>
-            <div className="space-y-0.5">
-              <h4 className="font-extrabold text-sm flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-cyan-200 fill-cyan-200" />
-                DeepSeek Chat
-              </h4>
-              <p className="text-[11px] text-cyan-100">
-                Excellent for logic, algorithms, writing script details, and debugging widgets.
-              </p>
+          <a
+            href="https://chat.deepseek.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-3 p-3 bg-white dark:bg-zinc-900 border ${theme.inputBorder} ${theme.radiusMedium} hover:border-teal-500 transition-all group cursor-pointer`}
+          >
+            <div className="p-2 bg-blue-50 dark:bg-blue-950/30 rounded-lg group-hover:scale-105 transition-transform shrink-0">
+              <DeepSeekIcon />
             </div>
-            <a
-              href="https://chat.deepseek.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex w-full items-center justify-center gap-1.5 px-3 py-2 bg-white text-cyan-700 font-extrabold text-xs ${theme.radiusSmall} hover:bg-zinc-100 transition-all cursor-pointer text-center shadow-sm`}
+            <div className="flex-1 min-w-0">
+              <h4 className={`text-xs font-bold ${theme.textPrimary} flex items-center gap-1`}>
+                DeepSeek
+                <ExternalLink className="w-2.5 h-2.5 text-zinc-400 group-hover:text-teal-500" />
+              </h4>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate">DeepSeek R1</p>
+            </div>
+          </a>
+
+          <a
+            href="https://claude.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-3 p-3 bg-white dark:bg-zinc-900 border ${theme.inputBorder} ${theme.radiusMedium} hover:border-teal-500 transition-all group cursor-pointer`}
+          >
+            <div className="p-2 bg-amber-50 dark:bg-amber-950/30 rounded-lg group-hover:scale-105 transition-transform shrink-0">
+              <ClaudeIcon />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h4 className={`text-xs font-bold ${theme.textPrimary} flex items-center gap-1`}>
+                Claude
+                <ExternalLink className="w-2.5 h-2.5 text-zinc-400 group-hover:text-teal-500" />
+              </h4>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate">Anthropic AI</p>
+            </div>
+          </a>
+
+          <a
+            href="https://grok.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-3 p-3 bg-white dark:bg-zinc-900 border ${theme.inputBorder} ${theme.radiusMedium} hover:border-teal-500 transition-all group cursor-pointer`}
+          >
+            <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg group-hover:scale-105 transition-transform shrink-0">
+              <GrokIcon />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h4 className={`text-xs font-bold ${theme.textPrimary} flex items-center gap-1`}>
+                Grok
+                <ExternalLink className="w-2.5 h-2.5 text-zinc-400 group-hover:text-teal-500" />
+              </h4>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate">xAI Grok</p>
+            </div>
+          </a>
+        </div>
+
+        {/* Theme Prompt Section */}
+        <div className={`p-4 bg-white dark:bg-zinc-900 border ${theme.inputBorder} ${theme.radiusMedium} space-y-3`}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5 text-teal-605 dark:text-teal-400 font-extrabold text-xs">
+              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
+              Theme Alignment Prompt
+            </div>
+            <button
+              onClick={() => handleCopyPrompt(999, THEME_ALIGNMENT_PROMPT)}
+              className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 rounded transition-all cursor-pointer"
             >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Launch DeepSeek Chat
-            </a>
+              {copiedPromptId === 999 ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5" />
+                  Copy Prompt
+                </>
+              )}
+            </button>
+          </div>
+          <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
+            Copy this design prompt to instruct any AI model to generate custom widgets that match the **Naz Basket** dark mode layout, fonts, rounded corners, and teal accents.
+          </p>
+          <div className="bg-zinc-50 dark:bg-zinc-950 p-2.5 rounded border border-zinc-200 dark:border-zinc-800 max-h-24 overflow-y-auto">
+            <code className="text-[10px] text-zinc-650 dark:text-zinc-400 font-mono whitespace-pre-wrap block">
+              {THEME_ALIGNMENT_PROMPT}
+            </code>
           </div>
         </div>
 
@@ -141,7 +237,7 @@ export default function AiCompanionHub({ isOpen, onClose }: AiCompanionHubProps)
               <div
                 key={p.id}
                 onClick={() => handleCopyPrompt(p.id, p.text)}
-                className={`group relative p-4 ${theme.radiusMedium} border ${theme.inputBorder} bg-white dark:bg-zinc-950 ${theme.accentBorderHover} hover:shadow-sm cursor-pointer transition-all duration-200 flex flex-col justify-between`}
+                className={`group relative p-4 ${theme.radiusMedium} border ${theme.inputBorder} bg-white dark:bg-zinc-900 ${theme.accentBorderHover} hover:shadow-sm cursor-pointer transition-all duration-200 flex flex-col justify-between`}
               >
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">

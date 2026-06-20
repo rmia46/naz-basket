@@ -310,6 +310,9 @@ export default function AddEditAppModal({
             
             {formType === "html" ? (
               <>
+                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mb-2 leading-relaxed">
+                  💡 <strong>Tip:</strong> Want your custom app to match the dark style and teal accents of Naz Basket? Copy the design prompt from the <strong>AI Companion Hub</strong> sidebar on the main screen.
+                </p>
                 <textarea
                   rows={10}
                   required
