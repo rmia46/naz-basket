@@ -526,6 +526,7 @@ export default function NazBasket() {
 
       {/* Mobile Bottom Navigation Bar */}
       <BottomNav
+        user={user}
         isGeminiOpen={isGeminiOpen}
         setIsGeminiOpen={setIsGeminiOpen}
         isEditMode={isEditMode}

@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { Home, Sparkles, Settings, HelpCircle, BookOpen } from "lucide-react";
+import { Home, Sparkles, Settings, HelpCircle, User } from "lucide-react";
 import { theme } from "@/lib/theme";
 
 interface BottomNavProps {
+  user: any;
   isGeminiOpen: boolean;
   setIsGeminiOpen: (open: boolean) => void;
   isEditMode: boolean;
@@ -16,6 +17,7 @@ interface BottomNavProps {
 }
 
 export default function BottomNav({
+  user,
   isGeminiOpen,
   setIsGeminiOpen,
   isEditMode,
@@ -94,13 +96,17 @@ export default function BottomNav({
         <span className="text-[10px] tracking-wide">Help</span>
       </button>
 
-      {/* About Tab */}
+      {/* Profile/About Tab */}
       <button
         onClick={() => setIsAboutOpen(true)}
         className={`flex flex-col items-center gap-0.5 py-1 px-3 ${theme.radiusSmall} ${theme.textMuted} hover:${theme.textSecondary} cursor-pointer`}
       >
-        <BookOpen className="w-5 h-5" />
-        <span className="text-[10px] tracking-wide">About</span>
+        {user?.photoURL ? (
+          <img src={user.photoURL} alt="Profile" className={`w-5 h-5 ${theme.radiusFull} border border-zinc-200 dark:border-zinc-800 object-cover`} />
+        ) : (
+          <User className="w-5 h-5" />
+        )}
+        <span className="text-[10px] tracking-wide">Profile</span>
       </button>
     </nav>
   );
