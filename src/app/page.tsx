@@ -161,6 +161,7 @@ export default function NazBasket() {
   const [isAddEditModalOpen, setIsAddEditModalOpen] = useState(false);
   const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [selectedAppForEdit, setSelectedAppForEdit] = useState<CustomApp | null>(null);
 
@@ -320,36 +321,7 @@ export default function NazBasket() {
     setSelectedAppForEdit(null);
     setFormName("");
     setFormType("html");
-    setFormContent(`<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background: #f4f4f5;
-    }
-    button {
-      padding: 12px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <h1>My Custom App</h1>
-  <button onclick="alert('Hello from Naz Basket!')">Click Me</button>
-</body>
-</html>`);
+    setFormContent("");
     setFormIcon("Terminal");
     setFormColor("bg-blue-500 text-white");
     setFormCategory("Utilities");
@@ -484,7 +456,7 @@ export default function NazBasket() {
   if (authLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-100 dark:bg-zinc-950 font-sans">
-        <div className="w-12 h-12 border-4 border-zinc-200 border-t-blue-600 rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-zinc-200 border-t-teal-600 rounded-full animate-spin"></div>
         <p className="mt-4 text-zinc-500 dark:text-zinc-400 font-medium">Launching dashboard...</p>
       </div>
     );
@@ -587,14 +559,14 @@ export default function NazBasket() {
                     placeholder="1:58392058295:web:8a92..."
                     value={wizardAppId}
                     onChange={(e) => setWizardAppId(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full mt-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-md shadow-blue-500/10 cursor-pointer text-sm"
+                className="w-full mt-2 bg-teal-600 hover:bg-teal-700 active:scale-[0.98] text-white font-semibold py-3 px-6 rounded-lg transition-all shadow-md shadow-teal-500/10 cursor-pointer text-sm"
               >
                 Save & Initialize
               </button>
@@ -605,7 +577,7 @@ export default function NazBasket() {
               href="https://console.firebase.google.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium"
+              className="text-xs text-teal-600 dark:text-teal-400 hover:underline font-medium"
             >
               Open Firebase Console →
             </a>
@@ -625,7 +597,7 @@ export default function NazBasket() {
             <img src="/logo.jpg" alt="Naz Basket Logo" className="w-8 h-8 rounded-md shadow-sm object-cover shrink-0" />
             <span className="select-none font-display font-normal text-2xl flex items-center gap-1.5 pt-1">
               <span className="text-zinc-950 dark:text-zinc-50">Naz</span>
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Basket</span>
+              <span className="bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">Basket</span>
             </span>
           </div>
           {!hasEnvCredentials && (
@@ -644,12 +616,12 @@ export default function NazBasket() {
           
           {/* Stunning Brand Hero Header */}
           <div className="mb-6 flex flex-col items-center gap-2">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-600 p-0.5 shadow-xl transition-transform hover:scale-105 duration-300">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-cyan-400 to-teal-500 p-0.5 shadow-xl transition-transform hover:scale-105 duration-300">
               <div className="w-full h-full bg-white dark:bg-zinc-950 rounded-2xl flex items-center justify-center overflow-hidden">
                 <img src="/logo.jpg" alt="Naz Basket Logo" className="w-[85%] h-[85%] object-cover rounded-xl" />
               </div>
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-semibold mt-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/40 border border-teal-200/50 dark:border-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-semibold mt-2">
               <Sparkles className="w-3.5 h-3.5 animate-pulse" />
               <span>Personal HTML App Hub</span>
             </div>
@@ -659,7 +631,7 @@ export default function NazBasket() {
             <span>Welcome to</span>
             <span className="font-display font-normal text-5xl md:text-7xl flex items-center gap-2">
               <span className="text-zinc-950 dark:text-zinc-50">Naz</span>
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Basket</span>
+              <span className="bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">Basket</span>
             </span>
           </h1>
           
@@ -716,13 +688,21 @@ export default function NazBasket() {
         </main>
 
         {/* Footer */}
-        <footer className="w-full text-center py-6 text-xs text-zinc-400 border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900 mt-12 shrink-0">
-          &copy; {new Date().getFullYear()} Naz Basket. Powered by Firebase. &bull;{" "}
+        <footer className="w-full text-center py-6 text-xs text-zinc-400 border-t border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900 mt-12 shrink-0 space-x-2">
+          <span>&copy; {new Date().getFullYear()} Naz Basket. Powered by Firebase.</span>
+          <span>&bull;</span>
           <button
             onClick={() => setIsAboutOpen(true)}
-            className="text-blue-600 dark:text-blue-400 hover:underline cursor-pointer bg-transparent border-none p-0 inline font-semibold"
+            className="text-teal-600 dark:text-teal-400 hover:underline cursor-pointer bg-transparent border-none p-0 inline font-semibold"
           >
             About
+          </button>
+          <span>&bull;</span>
+          <button
+            onClick={() => setIsHelpOpen(true)}
+            className="text-teal-600 dark:text-teal-400 hover:underline cursor-pointer bg-transparent border-none p-0 inline font-semibold"
+          >
+            Help Guide
           </button>
         </footer>
 
@@ -774,7 +754,7 @@ export default function NazBasket() {
                     </button>
                     <button
                       type="submit"
-                      className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg cursor-pointer"
+                      className="px-5 py-2 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold rounded-lg cursor-pointer"
                     >
                       Save Settings
                     </button>
@@ -800,7 +780,7 @@ export default function NazBasket() {
               <img src="/logo.jpg" alt="Naz Basket Logo" className="w-9 h-9 rounded-md shadow-sm object-cover shrink-0" />
               <h1 className="font-display font-normal text-3xl md:text-4xl flex items-center gap-2 pt-1.5">
                 <span className="text-zinc-950 dark:text-zinc-50">Naz</span>
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Basket</span>
+                <span className="bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">Basket</span>
               </h1>
               {isEditMode && (
                 <span className="text-xs bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-400 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse font-sans">
@@ -830,10 +810,10 @@ export default function NazBasket() {
               onClick={() => setIsGeminiOpen(!isGeminiOpen)}
               className={`p-2.5 rounded-full transition-all active:scale-95 shadow-sm border border-zinc-200 dark:border-zinc-900 cursor-pointer ${
                 isGeminiOpen
-                  ? "bg-blue-600 text-white border-transparent"
+                  ? "bg-teal-600 text-white border-transparent"
                   : "bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
               }`}
-              title="Gemini AI Chat"
+              title="AI Companion"
             >
               <Sparkles className="w-5 h-5" />
             </button>
@@ -843,6 +823,15 @@ export default function NazBasket() {
               onClick={() => setIsAboutOpen(true)}
               className="p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-900 rounded-full transition-all active:scale-95 shadow-sm cursor-pointer"
               title="About Naz Basket"
+            >
+              <BookOpen className="w-5 h-5" />
+            </button>
+
+            {/* Help Guide Popup Link */}
+            <button
+              onClick={() => setIsHelpOpen(true)}
+              className="p-2.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-900 rounded-full transition-all active:scale-95 shadow-sm cursor-pointer"
+              title="Help Guide"
             >
               <HelpCircle className="w-5 h-5" />
             </button>
@@ -920,7 +909,7 @@ export default function NazBasket() {
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-6">
         {appsLoading ? (
           <div className="h-48 flex items-center justify-center">
-            <div className="w-8 h-8 border-3 border-zinc-200 border-t-blue-600 rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-3 border-zinc-200 border-t-teal-600 rounded-full animate-spin"></div>
             <span className="ml-3 text-zinc-500 dark:text-zinc-400 font-medium">Syncing database...</span>
           </div>
         ) : (
@@ -987,7 +976,7 @@ export default function NazBasket() {
                         e.stopPropagation();
                         openEditModal(app);
                       }}
-                      className="absolute -top-1.5 -right-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-1.5 border-2 border-zinc-100 dark:border-zinc-950 shadow-md active:scale-90 transition-all cursor-pointer z-10"
+                      className="absolute -top-1.5 -right-1.5 bg-teal-600 hover:bg-teal-700 text-white rounded-full p-1.5 border-2 border-zinc-100 dark:border-zinc-950 shadow-md active:scale-90 transition-all cursor-pointer z-10"
                       title="Edit details"
                     >
                       <Edit className="w-3.5 h-3.5" />
@@ -1217,7 +1206,7 @@ export default function NazBasket() {
                         type="button"
                         onClick={() => setFormIcon(iconName)}
                         className={`w-9 h-9 rounded-md flex items-center justify-center transition-all hover:bg-zinc-200 dark:hover:bg-zinc-800 cursor-pointer ${
-                          formIcon === iconName ? "bg-zinc-300 dark:bg-zinc-800 ring-2 ring-blue-500 text-blue-600" : "text-zinc-600 dark:text-zinc-400"
+                          formIcon === iconName ? "bg-zinc-300 dark:bg-zinc-800 ring-2 ring-teal-500 text-teal-600" : "text-zinc-600 dark:text-zinc-400"
                         }`}
                         title={iconName}
                       >
@@ -1268,7 +1257,7 @@ export default function NazBasket() {
                       {formType === "html" ? "HTML Code Content *" : "Web URL Link *"}
                     </label>
                     {formType === "html" ? (
-                      <label className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline cursor-pointer flex items-center gap-1">
+                      <label className="text-xs font-bold text-teal-600 dark:text-teal-400 hover:underline cursor-pointer flex items-center gap-1">
                         <span>Import HTML File</span>
                         <input
                           type="file"
@@ -1314,7 +1303,7 @@ export default function NazBasket() {
                   id="formFavorite"
                   checked={formFavorite}
                   onChange={(e) => setFormFavorite(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 border-zinc-300 rounded focus:ring-blue-500"
+                  className="w-4 h-4 text-teal-600 border-zinc-300 rounded focus:ring-teal-500"
                 />
                 <label htmlFor="formFavorite" className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 select-none cursor-pointer flex items-center gap-1.5">
                   <Star className={`w-4 h-4 ${formFavorite ? "fill-amber-400 text-amber-400" : "text-zinc-400"}`} />
@@ -1342,7 +1331,7 @@ export default function NazBasket() {
                 <button
                   type="submit"
                   disabled={isSavingApp}
-                  className="px-6 py-2.5 rounded-lg text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white disabled:bg-blue-400 flex items-center gap-2 transition-colors cursor-pointer"
+                  className="px-6 py-2.5 rounded-lg text-sm font-bold bg-teal-600 hover:bg-teal-700 text-white disabled:bg-teal-400 flex items-center gap-2 transition-colors cursor-pointer"
                 >
                   {isSavingApp && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>}
                   <span>Save App</span>
@@ -1363,7 +1352,7 @@ export default function NazBasket() {
                 <img src="/logo.jpg" alt="Naz Basket Logo" className="w-7 h-7 rounded-md shadow-sm object-cover" />
                 <span className="select-none font-display font-normal text-xl flex items-center gap-1.5 pt-0.5">
                   <span className="text-zinc-950 dark:text-zinc-50">Naz</span>
-                  <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Basket</span>
+                  <span className="bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">Basket</span>
                 </span>
               </div>
               <button
@@ -1380,7 +1369,7 @@ export default function NazBasket() {
               
               {/* Hero Banner */}
               <div className="text-center space-y-3">
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-600 p-0.5 shadow-md">
+                <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-cyan-400 to-teal-500 p-0.5 shadow-md">
                   <div className="w-full h-full bg-white dark:bg-zinc-950 rounded-2xl flex items-center justify-center overflow-hidden">
                     <img src="/logo.jpg" alt="Naz Basket Logo" className="w-[85%] h-[85%] object-cover rounded-xl" />
                   </div>
@@ -1390,7 +1379,7 @@ export default function NazBasket() {
                     <span>About</span>
                     <span className="font-display font-normal text-3xl flex items-center gap-2">
                       <span className="text-zinc-950 dark:text-zinc-50">Naz</span>
-                      <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Basket</span>
+                      <span className="bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">Basket</span>
                     </span>
                   </h3>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
@@ -1413,7 +1402,7 @@ export default function NazBasket() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Author Card */}
                 <div className="bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-200/60 dark:border-zinc-800/80 rounded-xl p-4 flex items-start gap-3">
-                  <div className="p-2.5 bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 rounded-lg">
+                  <div className="p-2.5 bg-teal-50 dark:bg-teal-950/40 text-teal-600 dark:text-teal-400 rounded-lg">
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                       <circle cx="12" cy="7" r="4" />
@@ -1489,7 +1478,7 @@ export default function NazBasket() {
 
                   <div className="space-y-1">
                     <div className="flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+                      <Sparkles className="w-3.5 h-3.5 text-teal-650 dark:text-teal-450" />
                       <span className="font-bold text-xs text-zinc-850 dark:text-zinc-100">AI Companion Hub</span>
                     </div>
                     <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">
@@ -1508,6 +1497,121 @@ export default function NazBasket() {
                 className="px-4 py-2 rounded-lg text-xs font-bold bg-zinc-950 hover:bg-zinc-800 text-white dark:bg-zinc-50 dark:hover:bg-zinc-200 dark:text-zinc-950 cursor-pointer"
               >
                 Close About
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 9. Help Guide Modal Popup */}
+      {isHelpOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-8 animate-fade-in">
+          <div className="w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl flex flex-col max-h-[85vh]">
+            
+            {/* Header */}
+            <div className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-900/50 shrink-0">
+              <div className="flex items-center gap-2">
+                <span className="font-display font-normal text-xl select-none flex items-center gap-1.5 pt-0.5">
+                  <span className="text-zinc-950 dark:text-zinc-50">Naz</span>
+                  <span className="bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">Basket</span>
+                </span>
+                <span className="text-xs bg-teal-100 text-teal-700 dark:bg-teal-950/50 dark:text-teal-400 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider font-sans ml-1">
+                  Help Guide
+                </span>
+              </div>
+              <button
+                onClick={() => setIsHelpOpen(false)}
+                className="p-1.5 rounded-full text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-100 transition-colors cursor-pointer"
+                title="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Scrollable Body */}
+            <div className="p-6 md:p-8 overflow-y-auto space-y-6 flex-1 text-sm text-zinc-650 dark:text-zinc-300">
+              <h3 className="text-lg font-extrabold text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-800 pb-2">
+                How to Use Naz Basket
+              </h3>
+              
+              <div className="space-y-6">
+                
+                {/* Step 1 */}
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-950/60 text-teal-650 dark:text-teal-400 font-extrabold flex items-center justify-center shrink-0">
+                    1
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="font-bold text-zinc-900 dark:text-white">Create or Import Apps</h4>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Click the <span className="font-bold text-zinc-750 dark:text-zinc-200">Add App</span> card (with the plus sign) on your dashboard. You can select either <span className="font-semibold text-zinc-850 dark:text-zinc-100">HTML File</span> (imports HTML widgets and extracts titles), <span className="font-semibold text-zinc-850 dark:text-zinc-100">Raw HTML Code</span> (paste single-file widgets directly), or <span className="font-semibold text-zinc-850 dark:text-zinc-100">Web Link URL</span>.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-950/60 text-teal-650 dark:text-teal-400 font-extrabold flex items-center justify-center shrink-0">
+                    2
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="font-bold text-zinc-900 dark:text-white">Manage & Organize Your Workspace</h4>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Use categories like Utilities, Games, Dev Tools, or Media to organize your home screen. Pin items to your <span className="font-semibold text-zinc-850 dark:text-zinc-100">Favorites</span> panel, or search them instantly using the top global search bar.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-950/60 text-teal-650 dark:text-teal-400 font-extrabold flex items-center justify-center shrink-0">
+                    3
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="font-bold text-zinc-900 dark:text-white">Edit & Delete Apps</h4>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Click the <span className="font-bold text-zinc-750 dark:text-zinc-200">Settings Gear</span> icon in the top header to enter Edit Mode. Icons will start wiggling. You can delete widgets by clicking the delete marker on the icon. Click the gear again to exit.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 4 */}
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-950/60 text-teal-650 dark:text-teal-400 font-extrabold flex items-center justify-center shrink-0">
+                    4
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="font-bold text-zinc-900 dark:text-white">Construct Coding with AI Hub</h4>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Need custom widget scripts? Click the <span className="font-bold text-zinc-750 dark:text-zinc-200">Sparkles</span> icon to open the AI Companion panel. Copy pre-built HTML prompts, launch Gemini or DeepSeek in a new tab, and generate clean single-file HTML scripts to paste inside Naz Basket.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 5 */}
+                <div className="flex gap-4">
+                  <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-950/60 text-teal-650 dark:text-teal-400 font-extrabold flex items-center justify-center shrink-0">
+                    5
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="font-bold text-zinc-900 dark:text-white">Automatic Device Sync</h4>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Sign in with Google to sync your settings, directories, and custom widgets to the cloud. They sync in real-time across desktop and mobile devices.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/30 flex justify-end shrink-0">
+              <button
+                onClick={() => setIsHelpOpen(false)}
+                className="px-4 py-2 rounded-lg text-xs font-bold bg-zinc-950 hover:bg-violet-850 text-white dark:bg-zinc-50 dark:hover:bg-zinc-200 dark:text-zinc-950 cursor-pointer animate-none"
+              >
+                Got It
               </button>
             </div>
           </div>
@@ -1575,13 +1679,13 @@ export default function NazBasket() {
           {/* Launch Buttons Grid */}
           <div className="grid grid-cols-1 gap-3">
             {/* Gemini Launcher Card */}
-            <div className="p-4 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-sm space-y-3">
+            <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-500 text-white shadow-sm space-y-3">
               <div className="space-y-0.5">
                 <h4 className="font-extrabold text-sm flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-yellow-300 fill-yellow-300" />
                   Google Gemini
                 </h4>
-                <p className="text-[11px] text-blue-100">
+                <p className="text-[11px] text-teal-100">
                   Ideal for clean coding, structured HTML page design, and layout ideas.
                 </p>
               </div>
@@ -1589,7 +1693,7 @@ export default function NazBasket() {
                 href="https://gemini.google.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-1.5 px-3 py-2 bg-white text-blue-600 font-extrabold text-xs rounded-lg hover:bg-zinc-100 transition-all cursor-pointer text-center shadow-sm"
+                className="inline-flex w-full items-center justify-center gap-1.5 px-3 py-2 bg-white text-teal-600 font-extrabold text-xs rounded-lg hover:bg-zinc-100 transition-all cursor-pointer text-center shadow-sm"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 Launch Gemini AI
@@ -1672,7 +1776,7 @@ export default function NazBasket() {
                 >
                   <div className="space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="font-extrabold text-xs text-zinc-900 dark:text-zinc-50 group-hover:text-blue-600 transition-colors">
+                      <span className="font-extrabold text-xs text-zinc-900 dark:text-zinc-50 group-hover:text-teal-650 transition-colors">
                         {p.title}
                       </span>
                       {copiedPromptId === p.id ? (
