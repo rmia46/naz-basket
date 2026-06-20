@@ -1,25 +1,28 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft, User, Shield, Layers, Cpu, Sparkles } from "lucide-react";
+import { X, User, Shield, Layers, Cpu, Sparkles } from "lucide-react";
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 font-sans flex flex-col text-zinc-900 dark:text-zinc-50 transition-colors duration-200">
       {/* Top Header Navigation */}
-      <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Dashboard
-        </Link>
+      <header className="w-full px-6 py-4 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-900 bg-white dark:bg-zinc-900 shrink-0">
+        {/* Brand Logo & Name on the Left */}
         <div className="flex items-center gap-2">
           <img src="/logo.jpg" alt="Naz Basket Logo" className="w-7 h-7 rounded-md shadow-sm object-cover" />
           <span className="font-black text-lg tracking-tight select-none">
             Naz<span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-bold">Basket</span>
           </span>
         </div>
+
+        {/* Close Button on the Right */}
+        <Link
+          href="/"
+          className="p-1.5 rounded-full text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-zinc-50 transition-colors cursor-pointer"
+          title="Close About Page"
+        >
+          <X className="w-5 h-5" />
+        </Link>
       </header>
 
       {/* Main Content */}
@@ -47,7 +50,7 @@ export default function AboutPage() {
             Overview
           </h2>
           <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            Naz Basket is a lightweight, cloud-synced home screen designed to host, run, and organize custom single-file HTML applications, widgets, and external URLs. Inspired by modern iOS home screen styles, it provides fully responsive app grids, folders, search, categories, and wiggle animation edit controls. All applications run in sandboxed iframes, keeping your custom code isolated and safe.
+            Naz Basket is a lightweight, cloud-synced home screen designed to host, run, and organize custom single-file HTML applications, widgets, and external URLs. Inspired by modern dashboard and hub designs, it provides fully responsive app grids, folders, search, categories, and wiggle animation edit controls. All applications run in sandboxed iframes, keeping your custom code isolated and safe.
           </p>
         </section>
 
@@ -119,10 +122,10 @@ export default function AboutPage() {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                <h3 className="font-bold text-sm text-zinc-900 dark:text-white">iOS-Inspired Dashboard</h3>
+                <h3 className="font-bold text-sm text-zinc-900 dark:text-white">Dynamic App Desktop</h3>
               </div>
               <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                Includes categories, favorites, global search, and dynamic wiggling icons to organize your tools just like a personal smartphone home screen.
+                Includes categories, favorites, global search, and dynamic wiggling icons to organize your tools on a personal desktop workspace.
               </p>
             </div>
 
